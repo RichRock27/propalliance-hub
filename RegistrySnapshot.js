@@ -3324,7 +3324,7 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE deployment URL corrected 2026-06-02 to v47. Official DEV baseline exists with visible DEV label; DEV deployment pinned to v2.",
+      "notes": "LIVE deployment updated 2026-06-02 to v48 with Collected MTD balance-reduction metric. Official DEV baseline exists with visible DEV label; DEV deployment pinned to v2.",
       "registryRow": 38,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -3352,7 +3352,7 @@ function getRegistrySnapshot() {
           "env": "LIVE",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_/exec",
           "deploymentId": "AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_",
-          "pinnedVersion": "47",
+          "pinnedVersion": "48",
           "badge": "LIVE",
           "lastVerified": "2026-06-02"
         },
