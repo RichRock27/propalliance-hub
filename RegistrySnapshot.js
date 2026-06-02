@@ -3324,11 +3324,11 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE v35 verified and source-controlled. Official DEV baseline created from registry LIVE source with visible DEV label; DEV deployment pinned to v2.",
+      "notes": "LIVE deployment URL corrected 2026-06-02 to v47. Official DEV baseline exists with visible DEV label; DEV deployment pinned to v2.",
       "registryRow": 38,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
-      "liveUrl": "https://script.google.com/macros/s/AKfycbywWsON0mNJV76BtRab_r2-WFaWxl4zkW6DW_b2q7utLF9Ad5jfxioJ-F0goO7qhpgt/exec",
+      "liveUrl": "https://script.google.com/macros/s/AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_/exec",
       "devUrl": "https://script.google.com/macros/s/AKfycbwvlAGakbO050IUYDy_oVfusEi2ej6gjFk6MlKEz9OzbSfzsdyyxDqAgyVs0y5Ybr4q8g/exec",
       "liveScriptUrl": "https://script.google.com/home/projects/1VnYcqNbnpHQdDeBm_tLNYu85FGFJZxKTRyJRjqpf_GT2NNnv_jBcZEsU/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1klmBJGFpf6oBpKOo_mVt6I5mx9roNUlbhGecoDrFmutL1TnP45qqci5z/edit",
@@ -3338,7 +3338,7 @@ function getRegistrySnapshot() {
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/rich-collections-app-rca/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/rich-collections-app-rca",
       "missingItems": "",
-      "lastVerified": "2026-05-20",
+      "lastVerified": "2026-06-02",
       "readyForLive": "No pending DEV changes",
       "promotionStatus": "IN SYNC",
       "lastDevChange": "DEV baseline initialized 2026-05-20.",
@@ -3350,11 +3350,11 @@ function getRegistrySnapshot() {
         {
           "registryRow": 36,
           "env": "LIVE",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbywWsON0mNJV76BtRab_r2-WFaWxl4zkW6DW_b2q7utLF9Ad5jfxioJ-F0goO7qhpgt/exec",
-          "deploymentId": "AKfycbywWsON0mNJV76BtRab_r2-WFaWxl4zkW6DW_b2q7utLF9Ad5jfxioJ-F0goO7qhpgt",
-          "pinnedVersion": "35",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_/exec",
+          "deploymentId": "AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_",
+          "pinnedVersion": "47",
           "badge": "LIVE",
-          "lastVerified": "2026-05-26"
+          "lastVerified": "2026-06-02"
         },
         {
           "registryRow": 37,
