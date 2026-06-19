@@ -9,6 +9,22 @@ const CONFIG = {
   MASTER_API_URL: "https://script.google.com/a/macros/propalliance.com/s/AKfycbzwArfpLNQnQIOgwuBKFeeCbdmc4m39kksuNL7TDF6_ljgGKdGoHgOGbEWuku8jbAdZag/exec"
 };
 
+const HUB_WORKSTATE_PREFIX = 'HUB_WORKSTATE_V1__';
+const HUB_PROMOTION_STATES = [
+  'In Sync',
+  'DEV In Progress',
+  'Awaiting Approval',
+  'Ready to Promote',
+  'Approved but not promoted',
+  'LIVE Only',
+  'Missing DEV',
+  'Blocked',
+  'Unknown'
+];
+const HUB_WORKING_TRUTHS = ['DEV', 'LIVE', 'Unknown'];
+const HUB_SYNC_STATES = ['Current', 'Behind', 'Unknown', 'Missing'];
+const HUB_CONFIDENCE_STATES = ['High', 'Medium', 'Low', 'Unknown'];
+
 /**
  * Serves the Web App UI
  */
@@ -62,7 +78,9 @@ function getHubData() {
 function getRegistryHubData() {
   var snapshot = getRegistrySnapshot();
   var user = getCurrentHubUser_();
-  var projects = filterProjectsForRole_(snapshot.projects || [], user);
+  var memoryMap = getHubProjectMemoryMap_();
+  var enrichedProjects = enrichHubProjects_(snapshot.projects || [], memoryMap, user);
+  var projects = filterProjectsForRole_(enrichedProjects, user);
 
   return {
     generatedAt: snapshot.generatedAt,
@@ -74,8 +92,40 @@ function getRegistryHubData() {
     phase: snapshot.phase,
     safety: snapshot.safety,
     user: user,
-    summary: buildHubSummary_(snapshot.projects || []),
+    summary: buildHubSummary_(projects),
     projects: projects
+  };
+}
+
+function saveProjectWorkState(payload) {
+  var input = payload || {};
+  var slug = String(input.projectSlug || '').trim();
+  if (!slug) throw new Error('projectSlug is required.');
+
+  var snapshot = getRegistrySnapshot();
+  var project = (snapshot.projects || []).filter(function(item) {
+    return String(item.projectSlug || '') === slug;
+  })[0];
+  if (!project) throw new Error('Unknown projectSlug: ' + slug);
+
+  var user = getCurrentHubUser_();
+  var memory = normalizeHubWorkStateInput_(input, user);
+  PropertiesService.getScriptProperties().setProperty(
+    HUB_WORKSTATE_PREFIX + slug,
+    JSON.stringify(memory)
+  );
+
+  var map = getHubProjectMemoryMap_();
+  map[slug] = memory;
+  return enrichHubProject_(project, map[slug], user);
+}
+
+function getHubProjectWorkStateOptions() {
+  return {
+    promotionStates: HUB_PROMOTION_STATES.slice(),
+    workingTruths: HUB_WORKING_TRUTHS.slice(),
+    syncStates: HUB_SYNC_STATES.slice(),
+    confidenceStates: HUB_CONFIDENCE_STATES.slice()
   };
 }
 
@@ -156,7 +206,13 @@ function buildHubSummary_(projects) {
     legacy: 0,
     staleLive: 0,
     manualReview: 0,
-    backupsMissing: 0
+    backupsMissing: 0,
+    recentlyActive: 0,
+    awaitingApproval: 0,
+    outOfSync: 0,
+    blocked: 0,
+    githubMissing: 0,
+    inSync: 0
   };
 
   projects.forEach(function(project) {
@@ -167,9 +223,307 @@ function buildHubSummary_(projects) {
     if (project.governance && project.governance.staleLive) summary.staleLive++;
     if (project.governance && project.governance.manualReviewRequired) summary.manualReview++;
     if (project.governance && project.governance.backupMissing) summary.backupsMissing++;
+    if (project.workState && project.workState.lastWorkedAt) summary.recentlyActive++;
+    if (project.derived && project.derived.awaitingApproval) summary.awaitingApproval++;
+    if (project.derived && project.derived.outOfSync) summary.outOfSync++;
+    if (project.derived && project.derived.blocked) summary.blocked++;
+    if (project.derived && project.derived.githubMissing) summary.githubMissing++;
+    if (project.derived && project.derived.syncOverview === 'DEV matches LIVE') summary.inSync++;
   });
 
   return summary;
+}
+
+function getHubProjectMemoryMap_() {
+  var props = PropertiesService.getScriptProperties().getProperties() || {};
+  var map = {};
+  Object.keys(props).forEach(function(key) {
+    if (key.indexOf(HUB_WORKSTATE_PREFIX) !== 0) return;
+    var slug = key.substring(HUB_WORKSTATE_PREFIX.length);
+    try {
+      map[slug] = JSON.parse(props[key]);
+    } catch (err) {
+      map[slug] = {};
+    }
+  });
+  return map;
+}
+
+function normalizeHubWorkStateInput_(input, user) {
+  function cleanValue(value) {
+    return value == null ? '' : String(value).trim();
+  }
+
+  function pickEnum(value, allowed, fallback) {
+    var normalized = cleanValue(value);
+    return allowed.indexOf(normalized) !== -1 ? normalized : fallback;
+  }
+
+  var syncInput = input.syncState || {};
+  return {
+    projectSlug: cleanValue(input.projectSlug),
+    lastWorkedAt: cleanValue(input.lastWorkedAt) || new Date().toISOString(),
+    lastWorkedBy: cleanValue(input.lastWorkedBy) || cleanValue(user && user.email) || 'unknown',
+    lastActionSummary: cleanValue(input.lastActionSummary) || cleanValue(input.currentFocus),
+    nextActionSummary: cleanValue(input.nextActionSummary),
+    currentFocus: cleanValue(input.currentFocus),
+    workingTruth: pickEnum(input.workingTruth, HUB_WORKING_TRUTHS, 'Unknown'),
+    promotionState: pickEnum(input.promotionState, HUB_PROMOTION_STATES, 'Unknown'),
+    confidence: pickEnum(input.confidence, HUB_CONFIDENCE_STATES, 'Unknown'),
+    syncState: {
+      live: pickEnum(syncInput.live, HUB_SYNC_STATES, 'Unknown'),
+      dev: pickEnum(syncInput.dev, HUB_SYNC_STATES, 'Unknown'),
+      local: pickEnum(syncInput.local, HUB_SYNC_STATES, 'Unknown'),
+      github: pickEnum(syncInput.github, HUB_SYNC_STATES, 'Unknown')
+    },
+    notes: cleanValue(input.notes),
+    updatedAt: new Date().toISOString(),
+    updatedBy: cleanValue(user && user.email) || 'unknown'
+  };
+}
+
+function enrichHubProjects_(projects, memoryMap, user) {
+  return (projects || []).map(function(project) {
+    return enrichHubProject_(project, memoryMap[project.projectSlug] || {}, user);
+  });
+}
+
+function enrichHubProject_(project, memory, user) {
+  var copy = JSON.parse(JSON.stringify(project || {}));
+  var workState = buildHubWorkState_(copy, memory || {});
+  copy.workState = workState;
+  copy.derived = buildHubDerivedState_(copy, workState, user);
+  return copy;
+}
+
+function buildHubWorkState_(project, memory) {
+  var hasDev = !!(project.devUrl || project.devScriptUrl);
+  var hasLive = !!(project.liveUrl || project.liveScriptUrl);
+  var repoPresent = projectHasGithubRepo_(project);
+  var localConfigured = !!project.localDevPath;
+  var syncState = memory.syncState || {};
+  var promotionState = memory.promotionState || deriveHubDefaultPromotionState_(project);
+  var autoLastWorkedAt = deriveHubAutoLastWorkedAt_(project, memory || {});
+  var autoLastActionSummary = deriveHubAutoLastActionSummary_(project, memory || {});
+  var autoNextActionSummary = deriveHubAutoNextActionSummary_(project, memory || {}, {
+    hasDev: hasDev,
+    hasLive: hasLive,
+    repoPresent: repoPresent,
+    localConfigured: localConfigured,
+    promotionState: promotionState,
+    syncState: syncState
+  });
+  var autoConfidence = deriveHubAutoConfidence_(project, memory || {});
+
+  return {
+    projectSlug: project.projectSlug,
+    lastWorkedAt: memory.lastWorkedAt || autoLastWorkedAt,
+    lastWorkedBy: memory.lastWorkedBy || '',
+    lastActionSummary: memory.lastActionSummary || autoLastActionSummary,
+    nextActionSummary: memory.nextActionSummary || autoNextActionSummary,
+    currentFocus: memory.currentFocus || '',
+    workingTruth: memory.workingTruth || (hasDev ? 'DEV' : (hasLive ? 'LIVE' : 'Unknown')),
+    promotionState: promotionState,
+    confidence: memory.confidence || autoConfidence,
+    syncState: {
+      live: syncState.live || (hasLive ? 'Unknown' : 'Missing'),
+      dev: syncState.dev || (hasDev ? 'Unknown' : 'Missing'),
+      local: syncState.local || (localConfigured ? 'Unknown' : 'Missing'),
+      github: syncState.github || (repoPresent ? 'Unknown' : 'Missing')
+    },
+    notes: memory.notes || '',
+    updatedAt: memory.updatedAt || '',
+    updatedBy: memory.updatedBy || '',
+    repoPresent: repoPresent,
+    localConfigured: localConfigured
+  };
+}
+
+function deriveHubAutoLastWorkedAt_(project, memory) {
+  var explicit = String((memory && memory.lastWorkedAt) || '').trim();
+  if (explicit) return explicit;
+  var candidates = [
+    normalizeHubDateCandidate_((memory && memory.updatedAt) || ''),
+    extractHubDateFromText_(project.lastDevChange || ''),
+    extractHubDateFromText_(project.readyForLive || ''),
+    extractHubDateFromText_(project.promotionNotes || '')
+  ].filter(Boolean);
+  return candidates[0] || '';
+}
+
+function deriveHubAutoLastActionSummary_(project, memory) {
+  var explicit = String((memory && memory.lastActionSummary) || '').trim();
+  if (explicit) return explicit;
+  var candidates = [
+    String(project.lastDevChange || '').trim(),
+    String(project.readyForLive || '').trim(),
+    String(project.promotionNotes || '').trim()
+  ].filter(Boolean);
+  return candidates[0] || '';
+}
+
+function deriveHubAutoConfidence_(project, memory) {
+  var explicit = String((memory && memory.confidence) || '').trim();
+  if (explicit) return explicit;
+  return project.lastVerified ? 'Medium' : 'Unknown';
+}
+
+function deriveHubAutoNextActionSummary_(project, memory, context) {
+  var explicit = String((memory && memory.nextActionSummary) || '').trim();
+  if (explicit) return explicit;
+
+  var cfg = context || {};
+  var hasDev = !!cfg.hasDev;
+  var hasLive = !!cfg.hasLive;
+  var repoPresent = !!cfg.repoPresent;
+  var localConfigured = !!cfg.localConfigured;
+  var promotionState = String(cfg.promotionState || 'Unknown');
+  var sync = cfg.syncState || {};
+
+  if (project.governance && project.governance.manualReviewRequired) {
+    return 'Review governance notes before making more changes.';
+  }
+  if (!hasDev && hasLive) {
+    return 'Create a DEV surface before making more changes.';
+  }
+  if (!hasDev && !hasLive) {
+    return 'Confirm whether this project should exist in the registry and add its primary surface.';
+  }
+  if (!repoPresent) {
+    return 'Add or verify the GitHub repo link for this project.';
+  }
+  if (!localConfigured) {
+    return 'Confirm the local working path so DEV work has a clear home.';
+  }
+  if (promotionState === 'Awaiting Approval' || promotionState === 'Ready to Promote') {
+    return 'Review DEV changes and decide whether to promote them to LIVE.';
+  }
+  if (promotionState === 'Approved but not promoted') {
+    return 'Promote the approved DEV build to LIVE.';
+  }
+  if (promotionState === 'Blocked') {
+    return 'Resolve the blocker called out in the project notes before continuing.';
+  }
+  if (sync.live === 'Behind') {
+    return 'Check whether LIVE drifted and decide if DEV or LIVE is the source of truth.';
+  }
+  if (sync.github === 'Behind') {
+    return 'Push the local project state to GitHub.';
+  }
+  if (sync.local === 'Current' && (sync.github === 'Missing' || !repoPresent)) {
+    return 'Mirror the local project into GitHub so the record is complete.';
+  }
+  if (hasDev && hasLive) {
+    return 'Keep working in DEV until the next approved promotion.';
+  }
+  if (hasDev && !hasLive) {
+    return 'Continue building in DEV and publish to LIVE only after approval.';
+  }
+  return '';
+}
+
+function normalizeHubDateCandidate_(value) {
+  var text = String(value || '').trim();
+  if (!text) return '';
+  var direct = new Date(text);
+  if (!isNaN(direct.getTime())) return direct.toISOString();
+  return extractHubDateFromText_(text);
+}
+
+function extractHubDateFromText_(text) {
+  var value = String(text || '').trim();
+  if (!value) return '';
+  var isoMatch = value.match(/\b(20\d{2}-\d{2}-\d{2})(?:[T\s]\d{2}:\d{2}(?::\d{2})?(?:\.\d{3})?Z?)?\b/);
+  if (isoMatch) {
+    var isoDate = isoMatch[1];
+    var parsedIso = new Date(isoDate + 'T12:00:00Z');
+    if (!isNaN(parsedIso.getTime())) return parsedIso.toISOString();
+  }
+  var slashMatch = value.match(/\b(\d{1,2})\/(\d{1,2})\/(20\d{2})\b/);
+  if (slashMatch) {
+    var month = slashMatch[1].padStart(2, '0');
+    var day = slashMatch[2].padStart(2, '0');
+    var year = slashMatch[3];
+    var parsedSlash = new Date(year + '-' + month + '-' + day + 'T12:00:00Z');
+    if (!isNaN(parsedSlash.getTime())) return parsedSlash.toISOString();
+  }
+  return '';
+}
+
+function deriveHubDefaultPromotionState_(project) {
+  var hasDev = !!(project.devUrl || project.devScriptUrl);
+  var hasLive = !!(project.liveUrl || project.liveScriptUrl);
+  if (!hasDev && hasLive) return 'Missing DEV';
+  if (hasDev && !hasLive) return 'DEV In Progress';
+  if (!hasDev && !hasLive) return 'Unknown';
+  return 'In Sync';
+}
+
+function buildHubDerivedState_(project, workState) {
+  var hasDev = !!(project.devUrl || project.devScriptUrl);
+  var hasLive = !!(project.liveUrl || project.liveScriptUrl);
+  var githubMissing = !workState.repoPresent;
+  var promotionState = workState.promotionState || 'Unknown';
+  var syncOverview = deriveHubSyncOverview_(project, workState);
+  var blocked = promotionState === 'Blocked' || !!(project.governance && project.governance.manualReviewRequired);
+  var missingDev = !hasDev;
+  var awaitingApproval = ['Awaiting Approval', 'Ready to Promote', 'Approved but not promoted'].indexOf(promotionState) !== -1;
+  var outOfSync = ['DEV ahead of LIVE', 'LIVE ahead of DEV', 'GitHub behind Local', 'Local not mirrored'].indexOf(syncOverview) !== -1;
+  var safeToEdit = hasDev && !blocked;
+
+  return {
+    hasDev: hasDev,
+    hasLive: hasLive,
+    missingDev: missingDev,
+    githubMissing: githubMissing,
+    blocked: blocked,
+    awaitingApproval: awaitingApproval,
+    outOfSync: outOfSync,
+    syncOverview: syncOverview,
+    safeToEdit: safeToEdit,
+    operatingStateLabel: safeToEdit ? 'Safe to keep working in DEV' : (missingDev ? 'Needs DEV created' : 'Blocked / review needed'),
+    promotionStateLabel: mapPromotionStateLabel_(promotionState)
+  };
+}
+
+function deriveHubSyncOverview_(project, workState) {
+  var hasDev = !!(project.devUrl || project.devScriptUrl);
+  var hasLive = !!(project.liveUrl || project.liveScriptUrl);
+  var sync = workState.syncState || {};
+  var promotionState = workState.promotionState || 'Unknown';
+
+  if (!hasDev && hasLive) return 'LIVE only';
+  if (hasDev && !hasLive) return 'DEV only';
+  if (!hasDev && !hasLive) return 'Unknown';
+  if (['Awaiting Approval', 'Ready to Promote', 'Approved but not promoted'].indexOf(promotionState) !== -1) return 'DEV ahead of LIVE';
+  if (sync.live === 'Behind') return 'LIVE ahead of DEV';
+  if (sync.github === 'Behind') return 'GitHub behind Local';
+  if (sync.local === 'Current' && (sync.github === 'Missing' || !workState.repoPresent)) return 'Local not mirrored';
+  if (promotionState === 'In Sync' && sync.live === 'Current' && sync.dev === 'Current') return 'DEV matches LIVE';
+  if (promotionState === 'In Sync') return 'DEV matches LIVE';
+  return 'Unknown';
+}
+
+function mapPromotionStateLabel_(promotionState) {
+  switch (promotionState) {
+    case 'In Sync': return 'Promoted / matches LIVE';
+    case 'DEV In Progress': return 'Safe to keep working in DEV';
+    case 'Awaiting Approval': return 'Needs your review';
+    case 'Ready to Promote': return 'Needs your review';
+    case 'Approved but not promoted': return 'Approved but not promoted';
+    case 'LIVE Only': return 'LIVE only';
+    case 'Missing DEV': return 'Missing DEV governance';
+    case 'Blocked': return 'Blocked';
+    default: return 'Unknown';
+  }
+}
+
+function projectHasGithubRepo_(project) {
+  return (project.assets || []).some(function(asset) {
+    var assetType = String(asset.assetType || '').toLowerCase();
+    return (assetType === 'other' || assetType === 'github') &&
+      /github\.com/i.test(String(asset.url || ''));
+  });
 }
 
 function getLegacyHubData_() {

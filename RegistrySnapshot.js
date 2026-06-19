@@ -1,18 +1,18 @@
 /**
  * Generated registry snapshot for PropAlliance Hub.
  * Source of truth: /Users/richgreen/Downloads/📊 Spreadsheets/PA WebApp Router Registry.xlsx
- * Generated: 2026-05-27T00:00:00.000Z
+ * Generated: 2026-06-18T23:45:46.450Z
  * Do not hand-edit project data here; regenerate from the registry workbook.
  */
 function getRegistrySnapshot() {
   return {
-  "generatedAt": "2026-05-27T00:00:00.000Z",
+  "generatedAt": "2026-06-18T23:45:46.450Z",
   "generator": "pa-registry-backup-generator derived snapshot for PropAlliance Hub Phase 1",
   "registrySourcePath": "/Users/richgreen/Downloads/📊 Spreadsheets/PA WebApp Router Registry.xlsx",
-  "registryHash": "sha256:825c3390d160c7ad4a8eb5d8aca99d90ff3be2b421de7607183f881e9ed99515",
-  "projectCount": 39,
-  "assetCount": 106,
-  "deploymentCount": 62,
+  "registryHash": "sha256:9a5b0fb5336b9f7ee4d99747e28badd45e6367787c25039181698cf675e6b035",
+  "projectCount": 40,
+  "assetCount": 138,
+  "deploymentCount": 64,
   "phase": "Phase 1 Admin MVP",
   "safety": {
     "sourceOfTruth": "Registry workbook remains authoritative. Snapshot is a generated read-only view.",
@@ -97,6 +97,15 @@ function getRegistrySnapshot() {
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
           "critical": true,
           "lastVerified": "2026-04-30"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Delinquency Command Center - GitHub Repo",
+          "url": "https://github.com/RichRock27/dcc.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -137,10 +146,10 @@ function getRegistrySnapshot() {
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/propalliance-hub/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/propalliance-hub",
       "missingItems": "",
-      "lastVerified": "2026-05-20",
+      "lastVerified": "2026-05-10",
       "readyForLive": "No pending DEV changes",
       "promotionStatus": "",
-      "lastDevChange": "Baseline release tracking initialized 2026-05-14.",
+      "lastDevChange": "",
       "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
       "dataSourceAudit": "API: AppFolio signals found",
       "scriptAudit": "ACCESSIBLE",
@@ -160,9 +169,9 @@ function getRegistrySnapshot() {
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbyogm2uig9R05iBjeI976boZzrgRJJ3yiLbWoMXdhYjLoAn5hfoE5Es2waXpuI3aSOsxg/exec",
           "deploymentId": "AKfycbyogm2uig9R05iBjeI976boZzrgRJJ3yiLbWoMXdhYjLoAn5hfoE5Es2waXpuI3aSOsxg",
-          "pinnedVersion": "6",
+          "pinnedVersion": "8",
           "badge": "DEV",
-          "lastVerified": "2026-05-20"
+          "lastVerified": "2026-05-21"
         }
       ],
       "assets": [
@@ -198,10 +207,10 @@ function getRegistrySnapshot() {
         "missingDev": false,
         "staleLive": false,
         "legacy": false,
-        "readOnly": true,
+        "readOnly": false,
         "backupMissing": false,
         "manualReviewRequired": false,
-        "notes": "Batch 1 governance normalization: PropAlliance Hub is authoritative hub/router/registry authority. Workshop references are legacy only. | LIVE and DEV baseline set to registry release v1."
+        "notes": "Hub LIVE v49 and DEV v39 are synchronized with the authoritative registry workbook."
       },
       "visibility": {
         "admin": true,
@@ -216,13 +225,13 @@ function getRegistrySnapshot() {
       "projectSlug": "the-workshop",
       "category": "Core Operations",
       "owner": "rich@propalliance.com",
-      "status": "Legacy / Reference Only",
-      "routerStatus": "LEGACY",
-      "notes": "LEGACY ONLY. Replaced by PropAlliance Hub. Retained for historical reference and audit trail only. Not authoritative for Hub, router, governance, registry, or future development decisions.",
+      "status": "Archived — Do Not Use",
+      "routerStatus": "ARCHIVED",
+      "notes": "ARCHIVED — DO NOT USE. Dead project replaced by PropAlliance Hub. Retained only for recovery and audit history. Do not edit, update, deploy, promote, or create a DEV copy.",
       "registryRow": 4,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
-      "liveUrl": "https://script.google.com/macros/s/AKfycbzBctPuerb-GjU3tcnH3mSTeMbNdauOnPk7XBD-jhNiGNtjX8DWd8Oga7XPTT9f_F76/exec",
+      "liveUrl": "",
       "devUrl": "",
       "liveScriptUrl": "https://script.google.com/home/projects/1lVDvYwIJro89eVJrPgNhiHyrZlQkRSxR49URl3TfcixanrHUrhsXniH-/edit",
       "devScriptUrl": "",
@@ -231,15 +240,15 @@ function getRegistrySnapshot() {
       "anchorFolderUrl": "https://drive.google.com/drive/folders/1rjIWodu31vZzISTuTy4bTTJMx0mV4pPO",
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/the-workshop/DEV_BLOCKED.md",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/the-workshop",
-      "missingItems": "Legacy only - no active DEV required",
-      "lastVerified": "2026-05-10",
-      "readyForLive": "Do not promote",
-      "promotionStatus": "",
-      "lastDevChange": "",
-      "promotionNotes": "Legacy/reference only.",
+      "missingItems": "None — archived project; no DEV required",
+      "lastVerified": "2026-06-18",
+      "readyForLive": "No — archived; do not edit or deploy",
+      "promotionStatus": "ARCHIVED — BLOCKED",
+      "lastDevChange": "Archived 2026-06-18. No further development allowed.",
+      "promotionNotes": "Reactivation requires Rich Green's explicit approval.",
       "dataSourceAudit": "API: AppFolio signals found",
       "scriptAudit": "ACCESSIBLE",
-      "auditNotes": "Batch 1 governance normalization: Workshop is legacy/reference only and no longer authoritative.",
+      "auditNotes": "The Workshop is permanently archived and blocked from changes. Historical source and deployment references are retained only for cautious recovery.",
       "deployments": [
         {
           "registryRow": 6,
@@ -257,7 +266,7 @@ function getRegistrySnapshot() {
           "assetType": "Script",
           "name": "The Workshop - LIVE Script",
           "url": "https://script.google.com/home/projects/1lVDvYwIJro89eVJrPgNhiHyrZlQkRSxR49URl3TfcixanrHUrhsXniH-/edit",
-          "notes": "LIVE script from Hub registry. Audit: API: AppFolio signals found",
+          "notes": "LIVE script from Hub registry. Audit: API: AppFolio signals found ARCHIVED REFERENCE ONLY — DO NOT USE OR EDIT.",
           "critical": true,
           "lastVerified": "2026-04-30"
         },
@@ -266,19 +275,29 @@ function getRegistrySnapshot() {
           "assetType": "Folder",
           "name": "The Workshop - DEV Anchor Folder",
           "url": "https://drive.google.com/drive/folders/1rjIWodu31vZzISTuTy4bTTJMx0mV4pPO",
-          "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
+          "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working). ARCHIVED REFERENCE ONLY — DO NOT USE OR EDIT.",
           "critical": true,
           "lastVerified": "2026-04-30"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "The Workshop - GitHub Repo",
+          "url": "https://github.com/RichRock27/The-Workshop.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror. ARCHIVED REFERENCE ONLY — DO NOT USE OR EDIT.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
-        "missingDev": true,
+        "missingDev": false,
         "staleLive": false,
         "legacy": true,
         "readOnly": true,
         "backupMissing": false,
-        "manualReviewRequired": true,
-        "notes": "Legacy only - no active DEV required | Batch 1 governance normalization: Workshop is legacy/reference only and no longer authoritative. | Legacy/reference only."
+        "manualReviewRequired": false,
+        "notes": "Archived dead project. No active launch link. Historical records are retained only for recovery; edits and deployments are blocked.",
+        "archived": true
       },
       "visibility": {
         "admin": true,
@@ -563,6 +582,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Make Ready Board - GitHub Repo",
+          "url": "https://github.com/RichRock27/mrb.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -658,6 +686,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Utility Bill Back Tool - GitHub Repo",
+          "url": "https://github.com/RichRock27/ubb.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -753,6 +790,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Team Tasks - GitHub Repo",
+          "url": "https://github.com/RichRock27/tt.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -848,6 +894,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Utility Tracker 360 - GitHub Repo",
+          "url": "https://github.com/RichRock27/ut.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1038,6 +1093,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Vacancy Tracker - GitHub Repo",
+          "url": "https://github.com/RichRock27/vt.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1124,6 +1188,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Alias Database - GitHub Repo",
+          "url": "https://github.com/RichRock27/ad.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1210,6 +1283,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Notice To Vacate (Forms) - GitHub Repo",
+          "url": "https://github.com/RichRock27/ntvform.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1296,6 +1378,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Vacancy Dashboard - GitHub Repo",
+          "url": "https://github.com/RichRock27/vd.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1391,6 +1482,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Marketing Readiness Checklist - GitHub Repo",
+          "url": "https://github.com/RichRock27/mrc.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1417,7 +1517,7 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "Official DEV baseline created from registry LIVE source; DEV deployment pinned to v1. LIVE unchanged.",
+      "notes": "LIVE v15 and DEV v10 verified and synchronized. Owner Directory now uses AppFolio Reports API v2; Territory 18 Greenleaf/Villa Verde vacancy matching is fixed; local and GitHub main mirror the verified release.",
       "registryRow": 17,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -1431,32 +1531,32 @@ function getRegistrySnapshot() {
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/owner-directory/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/owner-directory",
       "missingItems": "",
-      "lastVerified": "2026-05-20",
+      "lastVerified": "2026-06-18",
       "readyForLive": "No pending DEV changes",
       "promotionStatus": "IN SYNC",
-      "lastDevChange": "DEV baseline initialized 2026-05-20.",
-      "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
-      "dataSourceAudit": "API: AppFolio signals found",
+      "lastDevChange": "",
+      "promotionNotes": "LIVE v15, DEV v10, local workspace, and GitHub main are synchronized. GitHub PR #1 merged as c16b80a.",
+      "dataSourceAudit": "API: AppFolio Reports API v2 verified; all six sources OK",
       "scriptAudit": "ACCESSIBLE",
-      "auditNotes": "Governance normalization: LIVE v6 identified; DEV missing; duplicate/conflicting candidates remain review-only. Official DEV baseline created 2026-05-20; LIVE unchanged.",
+      "auditNotes": "LIVE v15 authenticated fetch/rebuild passed. Territory 18 now reports 86 units, 16 vacancies, and 81% occupied; Force Update and Exclude Evict defaults verified.",
       "deployments": [
         {
           "registryRow": 16,
           "env": "LIVE",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbzB31GfdQiij6bLX1OhrC1vUTYyZDznvqb4Tv1jOD-UrVC5wNOjUCl2QHhQwVYhB7TxDw/exec",
           "deploymentId": "AKfycbzB31GfdQiij6bLX1OhrC1vUTYyZDznvqb4Tv1jOD-UrVC5wNOjUCl2QHhQwVYhB7TxDw",
-          "pinnedVersion": "6",
+          "pinnedVersion": "15",
           "badge": "LIVE",
-          "lastVerified": "2026-05-10"
+          "lastVerified": "2026-06-18"
         },
         {
           "registryRow": 48,
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycby9oIrAWWQ7etI6_sF7aAG98PJNtd9wd-HzgRFL__DQ_m6tUZhr2nMfs9lASh4YteMtiA/exec",
           "deploymentId": "AKfycby9oIrAWWQ7etI6_sF7aAG98PJNtd9wd-HzgRFL__DQ_m6tUZhr2nMfs9lASh4YteMtiA",
-          "pinnedVersion": "1",
+          "pinnedVersion": "10",
           "badge": "DEV",
-          "lastVerified": "2026-05-20"
+          "lastVerified": "2026-06-18"
         }
       ],
       "assets": [
@@ -1465,27 +1565,36 @@ function getRegistrySnapshot() {
           "assetType": "Script",
           "name": "Owner Directory - LIVE Script",
           "url": "https://script.google.com/home/projects/1e3u2luxnbdkGGpx90hkIimE-42ux-S90gMl65_URfpIyS5u-mf8b_6nm/edit",
-          "notes": "LIVE script from Hub registry. Audit: API: AppFolio signals found",
+          "notes": "Verified LIVE v15. AppFolio Reports API v2 migration and Territory 18 vacancy matching fix deployed successfully.",
           "critical": true,
-          "lastVerified": "2026-04-30"
+          "lastVerified": "2026-06-18"
         },
         {
           "registryRow": 36,
           "assetType": "Folder",
           "name": "Owner Directory - DEV Anchor Folder",
           "url": "https://drive.google.com/drive/folders/1h9a_-Sy6SiB7vFwxyKpQq-shrlqZQ02a",
-          "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
+          "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working); DEV v10 mirrors verified LIVE v15.",
           "critical": true,
-          "lastVerified": "2026-04-30"
+          "lastVerified": "2026-06-18"
         },
         {
           "registryRow": 90,
           "assetType": "Script",
           "name": "Owner Directory - DEV Script",
           "url": "https://script.google.com/home/projects/1k3EVld0YcO07DbeloPKBPUtwuiV4CYfIq6tKHSgmwq2mof-CfF92M3TU/edit",
-          "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
+          "notes": "DEV v10 mirrors verified LIVE v15, including AppFolio Reports API v2 and the Territory 18 vacancy fix.",
           "critical": true,
-          "lastVerified": "2026-05-20"
+          "lastVerified": "2026-06-18"
+        },
+        {
+          "registryRow": 108,
+          "assetType": "Other",
+          "name": "Owner Directory - GitHub Repo",
+          "url": "https://github.com/RichRock27/od",
+          "notes": "Canonical source mirror. PR #1 merged to main as commit c16b80a after synchronization with verified LIVE v15.",
+          "critical": true,
+          "lastVerified": "2026-06-18"
         }
       ],
       "governance": {
@@ -1495,7 +1604,7 @@ function getRegistrySnapshot() {
         "readOnly": false,
         "backupMissing": false,
         "manualReviewRequired": false,
-        "notes": "Governance normalization: LIVE v6 identified; DEV missing; duplicate/conflicting candidates remain review-only. Official DEV baseline created 2026-05-20; LIVE unchanged. | LIVE and DEV baseline set to registry release v1."
+        "notes": "LIVE v15, DEV v10, local workspace, and GitHub main commit c16b80a are verified and synchronized."
       },
       "visibility": {
         "admin": true,
@@ -1581,6 +1690,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "New Hire Intro Builder - GitHub Repo",
+          "url": "https://github.com/RichRock27/nhi.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1676,6 +1794,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Vacancy Scope - GitHub Repo",
+          "url": "https://github.com/RichRock27/vs.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1771,6 +1898,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Property Directory - GitHub Repo",
+          "url": "https://github.com/RichRock27/pd.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1791,8 +1927,8 @@ function getRegistrySnapshot() {
     },
     {
       "projectId": "owner_board",
-      "projectName": "Owner Board",
-      "projectSlug": "owner-board",
+      "projectName": "Owner Specific Dashboard",
+      "projectSlug": "owner-specific-dashboard",
       "category": "Core Operations",
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
@@ -1802,14 +1938,14 @@ function getRegistrySnapshot() {
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
       "liveUrl": "https://script.google.com/macros/s/AKfycbzcBbfeXancte7uirmlrSVMkBoZ8fcIePhlVVOOi_MQsWiE_C_gzooqD8FF3cN9xWSZNQ/exec?owner_board=true",
-      "devUrl": "https://script.google.com/macros/s/AKfycbzh-62ttcvgabv12fftJOdDj_HLDft9mQ6Sv1vOcPhGmgE8B4jorFD5LtRc-Tek7rjOYQ/exec?owner_board=true",
-      "liveScriptUrl": "https://script.google.com/home/projects/1wUTBEnMzWHMwegRx88m3yHccYQRvCjXtr6uJ7HLgEbonuUio-egrYAAk/edit",
+      "devUrl": "https://script.google.com/macros/s/AKfycbxNf9MnjAOkEOvd6wsJKHICHf9OrH9MCxM1FLVNL4cz9Jf1Y_972SeMgAB-JGBJTQJs_A/exec?owner_board=true",
+      "liveScriptUrl": "https://script.google.com/home/projects/1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1JNdfgyxo_aEZgCYPeCYSALzp_ZLxl5oLjfX8ywxabp9zEJprMGI4EbUQ/edit",
-      "liveScriptId": "1wUTBEnMzWHMwegRx88m3yHccYQRvCjXtr6uJ7HLgEbonuUio-egrYAAk",
+      "liveScriptId": "1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v",
       "devScriptId": "1JNdfgyxo_aEZgCYPeCYSALzp_ZLxl5oLjfX8ywxabp9zEJprMGI4EbUQ",
       "anchorFolderUrl": "https://drive.google.com/drive/folders/1xt5RKMPnNfiZrbi7y3kIQwaNUkfo1vvb",
-      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/owner-board/DEV_WORKSPACE",
-      "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/owner-board",
+      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/owner-specific-dashboard/DEV_WORKSPACE",
+      "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/owner-specific-dashboard",
       "missingItems": "",
       "lastVerified": "2026-05-20",
       "readyForLive": "No pending DEV changes",
@@ -1832,8 +1968,8 @@ function getRegistrySnapshot() {
         {
           "registryRow": 61,
           "env": "DEV",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbzh-62ttcvgabv12fftJOdDj_HLDft9mQ6Sv1vOcPhGmgE8B4jorFD5LtRc-Tek7rjOYQ/exec?owner_board=true",
-          "deploymentId": "AKfycbzh-62ttcvgabv12fftJOdDj_HLDft9mQ6Sv1vOcPhGmgE8B4jorFD5LtRc-Tek7rjOYQ",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbxNf9MnjAOkEOvd6wsJKHICHf9OrH9MCxM1FLVNL4cz9Jf1Y_972SeMgAB-JGBJTQJs_A/exec?owner_board=true",
+          "deploymentId": "AKfycbxNf9MnjAOkEOvd6wsJKHICHf9OrH9MCxM1FLVNL4cz9Jf1Y_972SeMgAB-JGBJTQJs_A",
           "pinnedVersion": "1",
           "badge": "DEV",
           "lastVerified": "2026-05-20"
@@ -1843,8 +1979,8 @@ function getRegistrySnapshot() {
         {
           "registryRow": 43,
           "assetType": "Script",
-          "name": "Owner Board - LIVE Script",
-          "url": "https://script.google.com/home/projects/1wUTBEnMzWHMwegRx88m3yHccYQRvCjXtr6uJ7HLgEbonuUio-egrYAAk/edit",
+          "name": "Owner Specific Dashboard - LIVE Script",
+          "url": "https://script.google.com/home/projects/1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v/edit",
           "notes": "LIVE script from Hub registry. Audit: API: other external API signals found",
           "critical": true,
           "lastVerified": "2026-04-30"
@@ -1852,7 +1988,7 @@ function getRegistrySnapshot() {
         {
           "registryRow": 44,
           "assetType": "Folder",
-          "name": "Owner Board - DEV Anchor Folder",
+          "name": "Owner Specific Dashboard - DEV Anchor Folder",
           "url": "https://drive.google.com/drive/folders/1xt5RKMPnNfiZrbi7y3kIQwaNUkfo1vvb",
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
           "critical": true,
@@ -1861,11 +1997,20 @@ function getRegistrySnapshot() {
         {
           "registryRow": 103,
           "assetType": "Script",
-          "name": "Owner Board - DEV Script",
+          "name": "Owner Specific Dashboard - DEV Script",
           "url": "https://script.google.com/home/projects/1JNdfgyxo_aEZgCYPeCYSALzp_ZLxl5oLjfX8ywxabp9zEJprMGI4EbUQ/edit",
           "notes": "Official DEV Apps Script project created from registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Owner Specific Dashboard - GitHub Repo",
+          "url": "https://github.com/RichRock27/Property_Dashboard.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -1961,6 +2106,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Key Keeper 2000 - GitHub Repo",
+          "url": "https://github.com/RichRock27/Key_Keeper.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2056,6 +2210,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Team Portal - GitHub Repo",
+          "url": "https://github.com/RichRock27/Team_Portal_GAS.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2151,6 +2314,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Leasing Fee Audit - GitHub Repo",
+          "url": "https://github.com/RichRock27/Unbilled_Fee_Audit.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2246,6 +2418,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Demand Generator - GitHub Repo",
+          "url": "https://github.com/RichRock27/dg.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2341,6 +2522,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Key Lookup Tool - GitHub Repo",
+          "url": "https://github.com/RichRock27/klt.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2445,6 +2635,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Ice Breakers - GitHub Repo",
+          "url": "https://github.com/RichRock27/ib.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2540,6 +2739,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Fitz Make Ready Board - GitHub Repo",
+          "url": "https://github.com/RichRock27/fmrb.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2635,6 +2843,15 @@ function getRegistrySnapshot() {
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
           "lastVerified": "2026-05-20"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Prospect Communication Dashboard - GitHub Repo",
+          "url": "https://github.com/RichRock27/pcb.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2661,28 +2878,28 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live - Needs Review",
       "routerStatus": "BLOCKED",
-      "notes": "LIVE reference exists but deployment/version was not fully verified. DEV environment missing. Review script access before future feature work.",
+      "notes": "LIVE reference exists and the DEV workspace is now recovered. Review before future feature work.",
       "registryRow": 30,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
       "liveUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbxyXYNpMtlVlVQCdrDzwxADbyWoWkfzuNlito7e75E-9-ThpAR4dHi7JJDtH1Z37TSi/exec",
       "devUrl": "",
-      "liveScriptUrl": "",
-      "devScriptUrl": "",
-      "liveScriptId": "",
-      "devScriptId": "",
+      "liveScriptUrl": "https://script.google.com/d/1BMdFWTuDCiblXH-QeDTAeylQvMLyFQZkTUKH-wuuCe3dFdARfwsM5vYF/edit",
+      "devScriptUrl": "https://script.google.com/d/1BMdFWTuDCiblXH-QeDTAeylQvMLyFQZkTUKH-wuuCe3dFdARfwsM5vYF/edit",
+      "liveScriptId": "1BMdFWTuDCiblXH-QeDTAeylQvMLyFQZkTUKH-wuuCe3dFdARfwsM5vYF",
+      "devScriptId": "1BMdFWTuDCiblXH-QeDTAeylQvMLyFQZkTUKH-wuuCe3dFdARfwsM5vYF",
       "anchorFolderUrl": "https://drive.google.com/drive/folders/1_cthDmhjvhGNqMt-uGNnnlCLh8n358NI",
-      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/ai-command-center/DEV_BLOCKED.md",
+      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/ai-command-center/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/ai-command-center",
-      "missingItems": "Valid LIVE Script ID, DEV Deployment, DEV Script",
+      "missingItems": "DEV Deployment",
       "lastVerified": "2026-05-10",
-      "readyForLive": "Manual source recovery required",
+      "readyForLive": "DEV workspace recovered; deployment still pending",
       "promotionStatus": "",
       "lastDevChange": "",
-      "promotionNotes": "No safe DEV can be created until source/script access is recovered.",
-      "dataSourceAudit": "NO SCRIPT ID / not applicable",
-      "scriptAudit": "NO_SCRIPT_ID",
-      "auditNotes": "DEV creation blocked: registry has LIVE deployment URL but no LIVE Script asset/script ID, and Projects row is marked NO_SCRIPT_ID.",
+      "promotionNotes": "DEV workspace recovered from the live project; deploy only after review.",
+      "dataSourceAudit": "LOCAL DEV WORKSPACE recovered",
+      "scriptAudit": "DEV_WORKSPACE_BOUND",
+      "auditNotes": "DEV workspace recovered and clasp-bound to the live Apps Script project. Hub records now point to the editable DEV workspace instead of the blocked marker.",
       "deployments": [
         {
           "registryRow": 29,
@@ -2706,13 +2923,13 @@ function getRegistrySnapshot() {
         }
       ],
       "governance": {
-        "missingDev": true,
+        "missingDev": false,
         "staleLive": false,
         "legacy": false,
-        "readOnly": true,
+        "readOnly": false,
         "backupMissing": false,
-        "manualReviewRequired": true,
-        "notes": "Valid LIVE Script ID, DEV Deployment, DEV Script | DEV creation blocked: registry has LIVE deployment URL but no LIVE Script asset/script ID, and Projects row is marked NO_SCRIPT_ID. | No safe DEV can be created until source/script access is recovered."
+        "manualReviewRequired": false,
+        "notes": "DEV workspace recovered; deployment still pending | DEV workspace recovered and clasp-bound to the live Apps Script project. Hub records now point to the editable DEV workspace instead of the blocked marker."
       },
       "visibility": {
         "admin": true,
@@ -2736,9 +2953,9 @@ function getRegistrySnapshot() {
       "liveUrl": "",
       "devUrl": "",
       "liveScriptUrl": "",
-      "devScriptUrl": "",
+      "devScriptUrl": "https://script.google.com/d/1BMdFWTuDCiblXH-QeDTAeylQvMLyFQZkTUKH-wuuCe3dFdARfwsM5vYF/edit",
       "liveScriptId": "",
-      "devScriptId": "",
+      "devScriptId": "1BMdFWTuDCiblXH-QeDTAeylQvMLyFQZkTUKH-wuuCe3dFdARfwsM5vYF",
       "anchorFolderUrl": "https://drive.google.com/drive/folders/1WujuXtmg9DlkP-PTAztmRVg9_6YLwnVN",
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/check-auditor/DEV_BLOCKED.md",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/check-auditor",
@@ -2761,6 +2978,15 @@ function getRegistrySnapshot() {
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
           "critical": true,
           "lastVerified": "2026-04-30"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Check Auditor - GitHub Repo",
+          "url": "https://github.com/RichRock27/check-auditor.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2819,6 +3045,15 @@ function getRegistrySnapshot() {
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
           "critical": true,
           "lastVerified": "2026-04-30"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Reimbursement Review - GitHub Repo",
+          "url": "https://github.com/RichRock27/Reimbursement_Review.git",
+          "notes": "Private GitHub source repo verified from the archived local project mirror.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -2886,6 +3121,15 @@ function getRegistrySnapshot() {
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
           "critical": true,
           "lastVerified": "2026-04-30"
+        },
+        {
+          "registryRow": 0,
+          "assetType": "GitHub",
+          "name": "Utility Tracker (Legacy) - GitHub Repo",
+          "url": "https://github.com/RichRock27/utleg.git",
+          "notes": "Private GitHub source repo mirrored from the verified local project workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -3157,11 +3401,11 @@ function getRegistrySnapshot() {
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/rich-photo-zipper/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/rich-photo-zipper",
       "missingItems": "",
-      "lastVerified": "2026-05-14",
-      "readyForLive": "No pending DEV changes",
+      "lastVerified": "2026-06-15",
+      "readyForLive": "Promoted approved RRWW footer update to LIVE on 2026-06-15; DEV, LIVE, local, and GitHub mirrors aligned.",
       "promotionStatus": "",
-      "lastDevChange": "DEV baseline created from current LIVE on 2026-05-14.",
-      "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
+      "lastDevChange": "RRWW footer logo updated with transparent treatment and spacing refinement; approved and promoted on 2026-06-15.",
+      "promotionNotes": "LIVE and DEV now match the approved RRWW footer update promoted on 2026-06-15.",
       "dataSourceAudit": "Browser local image processing only; no backend storage",
       "scriptAudit": "ACCESSIBLE",
       "auditNotes": "Official LIVE/DEV pair established 2026-05-14. DEV baseline matches LIVE release v1; future changes should deploy to DEV first and promote to LIVE only after explicit approval.",
@@ -3171,18 +3415,18 @@ function getRegistrySnapshot() {
           "env": "LIVE",
           "webAppUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycby0I4OJs4ubEOwJSIjXDsQjnGCHL2fec0G--gMG889qYmOBv2COQMeBndyV6CDem4_v/exec",
           "deploymentId": "AKfycby0I4OJs4ubEOwJSIjXDsQjnGCHL2fec0G--gMG889qYmOBv2COQMeBndyV6CDem4_v",
-          "pinnedVersion": "5",
+          "pinnedVersion": "8",
           "badge": "LIVE",
-          "lastVerified": "2026-05-14"
+          "lastVerified": "2026-06-15"
         },
         {
           "registryRow": 35,
           "env": "DEV",
           "webAppUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbxtrtxvWs-KsA9zO5q1uC48eQ5KYwIFkuaCZ0p07rwNiatorVgJUunXQzryA4vx4E0/exec",
           "deploymentId": "AKfycbxtrtxvWs-KsA9zO5q1uC48eQ5KYwIFkuaCZ0p07rwNiatorVgJUunXQzryA4vx4E0",
-          "pinnedVersion": "1",
+          "pinnedVersion": "11",
           "badge": "DEV",
-          "lastVerified": "2026-05-14"
+          "lastVerified": "2026-06-15"
         }
       ],
       "assets": [
@@ -3193,7 +3437,7 @@ function getRegistrySnapshot() {
           "url": "https://script.google.com/d/142acH-YQ5M3m4uNK3IBim0MNgOKzKxbWd1Fd3XdV8400NJ_QTHJyfuqE/edit",
           "notes": "Apps Script source for LIVE RPZ web app. Client-side processing only; no Drive storage for generated ZIPs.",
           "critical": true,
-          "lastVerified": "2026-05-14"
+          "lastVerified": "2026-06-15"
         },
         {
           "registryRow": 70,
@@ -3202,7 +3446,7 @@ function getRegistrySnapshot() {
           "url": "https://drive.google.com/drive/folders/1eWNjEoP8A2pKXMoPjp9zLLCevjNbKplK",
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working); contains source backup zip and README.",
           "critical": true,
-          "lastVerified": "2026-05-14"
+          "lastVerified": "2026-06-15"
         },
         {
           "registryRow": 71,
@@ -3211,7 +3455,7 @@ function getRegistrySnapshot() {
           "url": "https://github.com/RichRock27/rich-photo-zipper",
           "notes": "Private GitHub code backup containing standalone app and Google Apps Script source.",
           "critical": true,
-          "lastVerified": "2026-05-14"
+          "lastVerified": "2026-06-15"
         },
         {
           "registryRow": 72,
@@ -3220,7 +3464,7 @@ function getRegistrySnapshot() {
           "url": "https://script.google.com/d/1VKyXOJfonQg7SS2o4NJbHocweXpGODRcTTVmj-SChnf5VnN842NDZ-50/edit",
           "notes": "Apps Script source for official RPZ DEV web app. Use for experiments before LIVE promotion.",
           "critical": true,
-          "lastVerified": "2026-05-14"
+          "lastVerified": "2026-06-15"
         }
       ],
       "governance": {
@@ -3230,7 +3474,7 @@ function getRegistrySnapshot() {
         "readOnly": false,
         "backupMissing": false,
         "manualReviewRequired": false,
-        "notes": "Official LIVE/DEV pair established 2026-05-14. DEV baseline matches LIVE release v1; future changes should deploy to DEV first and promote to LIVE only after explicit approval. | LIVE and DEV baseline set to registry release v1."
+        "notes": "Official LIVE/DEV pair established 2026-05-14. DEV baseline matches LIVE release v1; future changes should deploy to DEV first and promote to LIVE only after explicit approval. | LIVE and DEV now match the approved RRWW footer update promoted on 2026-06-15."
       },
       "visibility": {
         "admin": true,
@@ -3324,46 +3568,46 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE deployment updated 2026-06-02 to v49 with separate Collected MTD posted-income metric. Official DEV baseline exists with visible DEV label; DEV deployment pinned to v2.",
+      "notes": "Official RCA LIVE now runs from the working DEV script via pinned deployment v20 created 2026-06-12. DEV and LIVE share the same runtime state, snapshots, and trigger environment. Current official restore point refreshed 2026-06-14.",
       "registryRow": 38,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
-      "liveUrl": "https://script.google.com/macros/s/AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_/exec",
-      "devUrl": "https://script.google.com/macros/s/AKfycbwvlAGakbO050IUYDy_oVfusEi2ej6gjFk6MlKEz9OzbSfzsdyyxDqAgyVs0y5Ybr4q8g/exec",
-      "liveScriptUrl": "https://script.google.com/home/projects/1VnYcqNbnpHQdDeBm_tLNYu85FGFJZxKTRyJRjqpf_GT2NNnv_jBcZEsU/edit",
+      "liveUrl": "https://script.google.com/macros/s/AKfycbwJ9MtwBIuyKoesAlteM4ECaSoMJxShKr4uSZaJht6N9qn6rjpu3MvALE4NdSw9bDop5w/exec",
+      "devUrl": "https://script.google.com/macros/s/AKfycbzXola33XPkVUy5sGUSBzE-JFUKATVeEYenflPAbPEx/exec",
+      "liveScriptUrl": "https://script.google.com/home/projects/1klmBJGFpf6oBpKOo_mVt6I5mx9roNUlbhGecoDrFmutL1TnP45qqci5z/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1klmBJGFpf6oBpKOo_mVt6I5mx9roNUlbhGecoDrFmutL1TnP45qqci5z/edit",
-      "liveScriptId": "1VnYcqNbnpHQdDeBm_tLNYu85FGFJZxKTRyJRjqpf_GT2NNnv_jBcZEsU",
+      "liveScriptId": "1klmBJGFpf6oBpKOo_mVt6I5mx9roNUlbhGecoDrFmutL1TnP45qqci5z",
       "devScriptId": "1klmBJGFpf6oBpKOo_mVt6I5mx9roNUlbhGecoDrFmutL1TnP45qqci5z",
       "anchorFolderUrl": "https://drive.google.com/drive/folders/1vuW3vjfxnwD-L7n5Y2O-owZcnZRK2aCt",
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/rich-collections-app-rca/DEV_WORKSPACE",
-      "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/rich-collections-app-rca",
+      "backupPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/rich-collections-app-rca/BEST_SO_FAR_RCA_DEV_20260614_OFFICIAL",
       "missingItems": "",
-      "lastVerified": "2026-06-02",
-      "readyForLive": "No pending DEV changes",
-      "promotionStatus": "IN SYNC",
-      "lastDevChange": "DEV baseline initialized 2026-05-20.",
-      "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
+      "lastVerified": "2026-06-14",
+      "readyForLive": "Official LIVE deployment already matches the approved working DEV build",
+      "promotionStatus": "OFFICIAL LIVE/DEV IN SYNC",
+      "lastDevChange": "Approved owner/property/admin build locked and mirrored on 2026-06-14.",
+      "promotionNotes": "Primary LIVE is the pinned deployment on the shared DEV script. Legacy standalone LIVE retained only as historical fallback.",
       "dataSourceAudit": "API: AppFolio Rent Roll via AppFolio API; daily snapshots retained in Google Sheet",
       "scriptAudit": "ACCESSIBLE",
-      "auditNotes": "Official DEV baseline created 2026-05-20 from registry LIVE v35 source; DEV label added. LIVE unchanged.",
+      "auditNotes": "Primary LIVE points at the approved shared-script deployment and should match current DEV behavior.",
       "deployments": [
         {
           "registryRow": 36,
           "env": "LIVE",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_/exec",
-          "deploymentId": "AKfycbwBVpec5cQ7B9QlC-hkJMEYxUxXLdFCuvi5zoD_AnItrHTqH2vQuSBM_Tim6Q87YLp_",
-          "pinnedVersion": "49",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbwJ9MtwBIuyKoesAlteM4ECaSoMJxShKr4uSZaJht6N9qn6rjpu3MvALE4NdSw9bDop5w/exec",
+          "deploymentId": "AKfycbwJ9MtwBIuyKoesAlteM4ECaSoMJxShKr4uSZaJht6N9qn6rjpu3MvALE4NdSw9bDop5w",
+          "pinnedVersion": "20",
           "badge": "LIVE",
-          "lastVerified": "2026-06-02"
+          "lastVerified": "2026-06-14"
         },
         {
           "registryRow": 37,
           "env": "DEV",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbwvlAGakbO050IUYDy_oVfusEi2ej6gjFk6MlKEz9OzbSfzsdyyxDqAgyVs0y5Ybr4q8g/exec",
-          "deploymentId": "AKfycbwvlAGakbO050IUYDy_oVfusEi2ej6gjFk6MlKEz9OzbSfzsdyyxDqAgyVs0y5Ybr4q8g",
-          "pinnedVersion": "2",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbzXola33XPkVUy5sGUSBzE-JFUKATVeEYenflPAbPEx/exec",
+          "deploymentId": "AKfycbzXola33XPkVUy5sGUSBzE-JFUKATVeEYenflPAbPEx",
+          "pinnedVersion": "HEAD",
           "badge": "DEV",
-          "lastVerified": "2026-05-20"
+          "lastVerified": "2026-06-14"
         }
       ],
       "assets": [
@@ -3371,8 +3615,8 @@ function getRegistrySnapshot() {
           "registryRow": 74,
           "assetType": "Script",
           "name": "RCA - LIVE Script",
-          "url": "https://script.google.com/home/projects/1VnYcqNbnpHQdDeBm_tLNYu85FGFJZxKTRyJRjqpf_GT2NNnv_jBcZEsU/edit",
-          "notes": "Source code - LIVE Apps Script. Current production deployment pinned to v35 at repo creation.",
+          "url": "https://script.google.com/home/projects/1klmBJGFpf6oBpKOo_mVt6I5mx9roNUlbhGecoDrFmutL1TnP45qqci5z/edit",
+          "notes": "Primary LIVE now runs from the shared DEV Apps Script project through the approved pinned deployment.",
           "critical": true,
           "lastVerified": "2026-05-18"
         },
@@ -3429,7 +3673,7 @@ function getRegistrySnapshot() {
         "readOnly": false,
         "backupMissing": false,
         "manualReviewRequired": false,
-        "notes": "Official DEV baseline created 2026-05-20 from registry LIVE v35 source; DEV label added. LIVE unchanged. | LIVE and DEV baseline set to registry release v1."
+        "notes": "Primary LIVE now runs from the approved shared-script deployment and matches the working DEV build."
       },
       "visibility": {
         "admin": true,
@@ -3438,68 +3682,68 @@ function getRegistrySnapshot() {
         "owner": false
       }
     },
-{
-    "projectId": "property_alliance_collections_dashboard",
-    "projectName": "Property Alliance Collections Dashboard",
-    "projectSlug": "property-alliance-collections-dashboard",
-    "category": "Core Operations",
-    "owner": "rich@propalliance.com",
-    "status": "Live/Dev",
-    "routerStatus": "READY",
-    "notes": "Former tenant debt collections workflow app. Separate from Rich Collections App (RCA). Added to registry/Hub 2026-05-27.",
-    "registryRow": 39,
-    "sourceAuthority": "Local registry update 2026-05-27",
-    "sourceOrigin": "GOOGLE_APPS_SCRIPT",
-    "liveUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
-    "devUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
-    "liveScriptUrl": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
-    "devScriptUrl": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
-    "liveScriptId": "1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY",
-    "devScriptId": "1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY",
-    "anchorFolderUrl": "",
-    "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/property-alliance-collections-dashboard/DEV_WORKSPACE",
-    "backupPath": "",
-    "missingItems": "Separate DEV script, cold backup, Drive anchor folder, GitHub repo",
-    "lastVerified": "2026-05-27",
-    "readyForLive": "Current live Apps Script deployment exists; DEV split still needed",
-    "promotionStatus": "LIVE APP REGISTERED",
-    "lastDevChange": "Registry/Hub onboarding 2026-05-27.",
-    "promotionNotes": "PACD is separate from RCA. Current local source snapshot captured in DEV workspace.",
-    "dataSourceAudit": "AppFolio API reports: eligible_debt_summary and tenant_tickler; merged into Collections_Master Google Sheet.",
-    "scriptAudit": "ACCESSIBLE",
-    "auditNotes": "Local source copied from current PACD working folder into registry DEV workspace.",
-    "deployments": [
+    {
+      "projectId": "property_alliance_collections_dashboard",
+      "projectName": "Property Alliance Collections Dashboard",
+      "projectSlug": "property-alliance-collections-dashboard",
+      "category": "Core Operations",
+      "owner": "rich@propalliance.com",
+      "status": "Live/Dev",
+      "routerStatus": "READY",
+      "notes": "Former tenant debt collections workflow app. Separate from Rich Collections App (RCA). Added to registry/Hub 2026-05-27.",
+      "registryRow": 39,
+      "sourceAuthority": "Local registry update 2026-05-27",
+      "sourceOrigin": "GOOGLE_APPS_SCRIPT",
+      "liveUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
+      "devUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
+      "liveScriptUrl": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
+      "devScriptUrl": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
+      "liveScriptId": "1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY",
+      "devScriptId": "1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY",
+      "anchorFolderUrl": "",
+      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/property-alliance-collections-dashboard/DEV_WORKSPACE",
+      "backupPath": "",
+      "missingItems": "Separate DEV script, cold backup, Drive anchor folder, GitHub repo",
+      "lastVerified": "2026-05-27",
+      "readyForLive": "Current live Apps Script deployment exists; DEV split still needed",
+      "promotionStatus": "LIVE APP REGISTERED",
+      "lastDevChange": "Registry/Hub onboarding 2026-05-27.",
+      "promotionNotes": "PACD is separate from RCA. Current local source snapshot captured in DEV workspace.",
+      "dataSourceAudit": "AppFolio API reports: eligible_debt_summary and tenant_tickler; merged into Collections_Master Google Sheet.",
+      "scriptAudit": "ACCESSIBLE",
+      "auditNotes": "Local source copied from current PACD working folder into registry DEV workspace.",
+      "deployments": [
         {
-            "registryRow": 3901,
-            "env": "LIVE",
-            "webAppUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
-            "deploymentId": "AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi",
-            "pinnedVersion": "47",
-            "badge": "LIVE",
-            "lastVerified": "2026-05-27"
+          "registryRow": 3901,
+          "env": "LIVE",
+          "webAppUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
+          "deploymentId": "AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi",
+          "pinnedVersion": "47",
+          "badge": "LIVE",
+          "lastVerified": "2026-05-27"
         }
-    ],
-    "assets": [
+      ],
+      "assets": [
         {
-            "registryRow": 3902,
-            "assetType": "Script",
-            "name": "PACD - LIVE Script",
-            "url": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
-            "notes": "Apps Script source for Property Alliance Collections Dashboard.",
-            "critical": true,
-            "lastVerified": "2026-05-27"
+          "registryRow": 3902,
+          "assetType": "Script",
+          "name": "PACD - LIVE Script",
+          "url": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
+          "notes": "Apps Script source for Property Alliance Collections Dashboard.",
+          "critical": true,
+          "lastVerified": "2026-05-27"
         },
         {
-            "registryRow": 3903,
-            "assetType": "Sheet",
-            "name": "PACD - Data Spreadsheet",
-            "url": "https://docs.google.com/spreadsheets/d/1R8CyMq117tNx3AJrjt4c-Si9AFHVbfOgD8OKTfopBzY",
-            "notes": "Collections data store with raw reports, master table, settings, templates, and sent-to-collections archive.",
-            "critical": true,
-            "lastVerified": "2026-05-27"
+          "registryRow": 3903,
+          "assetType": "Sheet",
+          "name": "PACD - Data Spreadsheet",
+          "url": "https://docs.google.com/spreadsheets/d/1R8CyMq117tNx3AJrjt4c-Si9AFHVbfOgD8OKTfopBzY",
+          "notes": "Collections data store with raw reports, master table, settings, templates, and sent-to-collections archive.",
+          "critical": true,
+          "lastVerified": "2026-05-27"
         }
-    ],
-    "governance": {
+      ],
+      "governance": {
         "missingDev": true,
         "staleLive": false,
         "legacy": false,
@@ -3507,14 +3751,91 @@ function getRegistrySnapshot() {
         "backupMissing": true,
         "manualReviewRequired": true,
         "notes": "Registered as its own project. Needs separate DEV script/repo/backup hardening."
-    },
-    "visibility": {
+      },
+      "visibility": {
         "admin": true,
         "supervisor": true,
         "pm": true,
         "owner": false
+      }
+    },
+    {
+      "projectId": "pa_identity_email_routing_hub",
+      "projectName": "PA Identity & Email Routing Hub",
+      "projectSlug": "pa-identity-email-routing-hub",
+      "category": "Infrastructure",
+      "owner": "rich@propalliance.com",
+      "status": "Live - DEV Local / Needs Deploy",
+      "routerStatus": "NEEDS DEV",
+      "notes": "Central source-of-truth staff directory and territory-based email routing library. Production is the bound Google Sheet/script. Local source exists; a separate DEV Sheet/script has not been created.",
+      "registryRow": 39,
+      "sourceAuthority": "PA WebApp Router Registry.xlsx",
+      "sourceOrigin": "GOOGLE_APPS_SCRIPT",
+      "liveUrl": "https://docs.google.com/spreadsheets/d/1M_8Yln9yQLe6f2t5xmLf70bl2NYSipAgeX3ZKXdfsHA/edit",
+      "devUrl": "",
+      "liveScriptUrl": "https://script.google.com/home/projects/1KCSM8W7mTRjQ5sK6xK0z7wCuOsGlnR_JxeYTMDofQyzxqSUO3z2I53Ki/edit",
+      "devScriptUrl": "",
+      "liveScriptId": "1KCSM8W7mTRjQ5sK6xK0z7wCuOsGlnR_JxeYTMDofQyzxqSUO3z2I53Ki",
+      "devScriptId": "",
+      "anchorFolderUrl": "",
+      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/central-email-database",
+      "backupPath": "",
+      "missingItems": "DEV Deployment, DEV Script, Drive anchor folder, cold backup",
+      "lastVerified": "2026-06-18",
+      "readyForLive": "No — create and test a separate bound DEV copy before promotion workflows.",
+      "promotionStatus": "LIVE VERIFIED / DEV NOT CREATED",
+      "lastDevChange": "Central routing integration completed 2026-06-18.",
+      "promotionNotes": "Do not treat the production Sheet/script as DEV.",
+      "dataSourceAudit": "Google Sheet is the canonical identity, role, property, territory, and routing-rule data source.",
+      "scriptAudit": "ACCESSIBLE",
+      "auditNotes": "LIVE Sheet and bound Apps Script verified. Staff sidebar loads and routing library v2 is in use by connected projects. No separate DEV environment exists.",
+      "deployments": [
+        {
+          "registryRow": 63,
+          "env": "LIVE",
+          "webAppUrl": "https://docs.google.com/spreadsheets/d/1M_8Yln9yQLe6f2t5xmLf70bl2NYSipAgeX3ZKXdfsHA/edit",
+          "deploymentId": "",
+          "pinnedVersion": "2",
+          "badge": "LIVE",
+          "lastVerified": "2026-06-18"
+        }
+      ],
+      "assets": [
+        {
+          "registryRow": 106,
+          "assetType": "Script",
+          "name": "Identity Routing Hub - LIVE Script",
+          "url": "https://script.google.com/home/projects/1KCSM8W7mTRjQ5sK6xK0z7wCuOsGlnR_JxeYTMDofQyzxqSUO3z2I53Ki/edit",
+          "notes": "Container-bound Apps Script source and shared library used by connected property-management projects.",
+          "critical": true,
+          "lastVerified": "2026-06-18"
+        },
+        {
+          "registryRow": 107,
+          "assetType": "Sheet",
+          "name": "Identity Routing Hub - LIVE Sheet",
+          "url": "https://docs.google.com/spreadsheets/d/1M_8Yln9yQLe6f2t5xmLf70bl2NYSipAgeX3ZKXdfsHA/edit",
+          "notes": "Canonical staff, role, territory, property, permission, and routing-rule database.",
+          "critical": true,
+          "lastVerified": "2026-06-18"
+        }
+      ],
+      "governance": {
+        "missingDev": true,
+        "staleLive": false,
+        "legacy": false,
+        "readOnly": false,
+        "backupMissing": true,
+        "manualReviewRequired": true,
+        "notes": "Production is verified. Create a separate bound DEV Sheet/script before any experimental changes."
+      },
+      "visibility": {
+        "admin": true,
+        "supervisor": true,
+        "pm": true,
+        "owner": false
+      }
     }
-}
   ]
 };
 }
