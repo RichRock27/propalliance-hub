@@ -21,6 +21,12 @@ const HUB_PROMOTION_STATES = [
   'Blocked',
   'Unknown'
 ];
+const HUB_HEALTH_STATES = [
+  'Operational',
+  'Needs Work',
+  'Broken',
+  'Unknown'
+];
 const HUB_WORKING_TRUTHS = ['DEV', 'LIVE', 'Unknown'];
 const HUB_SYNC_STATES = ['Current', 'Behind', 'Unknown', 'Missing'];
 const HUB_CONFIDENCE_STATES = ['High', 'Medium', 'Low', 'Unknown'];
@@ -123,6 +129,7 @@ function saveProjectWorkState(payload) {
 function getHubProjectWorkStateOptions() {
   return {
     promotionStates: HUB_PROMOTION_STATES.slice(),
+    healthStates: HUB_HEALTH_STATES.slice(),
     workingTruths: HUB_WORKING_TRUTHS.slice(),
     syncStates: HUB_SYNC_STATES.slice(),
     confidenceStates: HUB_CONFIDENCE_STATES.slice()
@@ -269,6 +276,7 @@ function normalizeHubWorkStateInput_(input, user) {
     currentFocus: cleanValue(input.currentFocus),
     workingTruth: pickEnum(input.workingTruth, HUB_WORKING_TRUTHS, 'Unknown'),
     promotionState: pickEnum(input.promotionState, HUB_PROMOTION_STATES, 'Unknown'),
+    healthStatus: pickEnum(input.healthStatus, HUB_HEALTH_STATES, 'Unknown'),
     confidence: pickEnum(input.confidence, HUB_CONFIDENCE_STATES, 'Unknown'),
     syncState: {
       live: pickEnum(syncInput.live, HUB_SYNC_STATES, 'Unknown'),
@@ -277,6 +285,7 @@ function normalizeHubWorkStateInput_(input, user) {
       github: pickEnum(syncInput.github, HUB_SYNC_STATES, 'Unknown')
     },
     notes: cleanValue(input.notes),
+    healthNotes: cleanValue(input.healthNotes),
     updatedAt: new Date().toISOString(),
     updatedBy: cleanValue(user && user.email) || 'unknown'
   };
@@ -314,6 +323,14 @@ function buildHubWorkState_(project, memory) {
     syncState: syncState
   });
   var autoConfidence = deriveHubAutoConfidence_(project, memory || {});
+  var healthStatus = memory.healthStatus || deriveHubDefaultHealthStatus_(project, {
+    hasDev: hasDev,
+    hasLive: hasLive,
+    repoPresent: repoPresent,
+    localConfigured: localConfigured,
+    promotionState: promotionState,
+    syncState: syncState
+  });
 
   return {
     projectSlug: project.projectSlug,
@@ -324,6 +341,7 @@ function buildHubWorkState_(project, memory) {
     currentFocus: memory.currentFocus || '',
     workingTruth: memory.workingTruth || (hasDev ? 'DEV' : (hasLive ? 'LIVE' : 'Unknown')),
     promotionState: promotionState,
+    healthStatus: healthStatus,
     confidence: memory.confidence || autoConfidence,
     syncState: {
       live: syncState.live || (hasLive ? 'Unknown' : 'Missing'),
@@ -332,6 +350,7 @@ function buildHubWorkState_(project, memory) {
       github: syncState.github || (repoPresent ? 'Unknown' : 'Missing')
     },
     notes: memory.notes || '',
+    healthNotes: memory.healthNotes || '',
     updatedAt: memory.updatedAt || '',
     updatedBy: memory.updatedBy || '',
     repoPresent: repoPresent,
@@ -459,11 +478,32 @@ function deriveHubDefaultPromotionState_(project) {
   return 'In Sync';
 }
 
+function deriveHubDefaultHealthStatus_(project, context) {
+  var cfg = context || {};
+  var hasDev = !!cfg.hasDev;
+  var hasLive = !!cfg.hasLive;
+  var promotionState = String(cfg.promotionState || 'Unknown');
+  var sync = cfg.syncState || {};
+  var blocked = !!(project.governance && project.governance.manualReviewRequired) || promotionState === 'Blocked';
+
+  if (blocked) return 'Broken';
+  if (!hasDev && hasLive) return 'Broken';
+  if (!hasDev && !hasLive) return 'Broken';
+  if (promotionState === 'Missing DEV') return 'Broken';
+  if (promotionState === 'Awaiting Approval' || promotionState === 'Ready to Promote' || promotionState === 'Approved but not promoted') return 'Needs Work';
+  if (sync.live === 'Behind' || sync.dev === 'Behind' || sync.github === 'Behind' || sync.local === 'Behind') return 'Needs Work';
+  if (promotionState === 'DEV In Progress') return 'Needs Work';
+  if (promotionState === 'In Sync' && sync.live !== 'Behind' && sync.dev !== 'Behind') return 'Operational';
+  if (hasDev && hasLive) return 'Needs Work';
+  return 'Unknown';
+}
+
 function buildHubDerivedState_(project, workState) {
   var hasDev = !!(project.devUrl || project.devScriptUrl);
   var hasLive = !!(project.liveUrl || project.liveScriptUrl);
   var githubMissing = !workState.repoPresent;
   var promotionState = workState.promotionState || 'Unknown';
+  var healthStatus = workState.healthStatus || 'Unknown';
   var syncOverview = deriveHubSyncOverview_(project, workState);
   var blocked = promotionState === 'Blocked' || !!(project.governance && project.governance.manualReviewRequired);
   var missingDev = !hasDev;
@@ -482,7 +522,10 @@ function buildHubDerivedState_(project, workState) {
     syncOverview: syncOverview,
     safeToEdit: safeToEdit,
     operatingStateLabel: safeToEdit ? 'Safe to keep working in DEV' : (missingDev ? 'Needs DEV created' : 'Blocked / review needed'),
-    promotionStateLabel: mapPromotionStateLabel_(promotionState)
+    promotionStateLabel: mapPromotionStateLabel_(promotionState),
+    healthLabel: mapHealthStateLabel_(healthStatus),
+    healthClass: mapHealthStateClass_(healthStatus),
+    healthStatus: healthStatus
   };
 }
 
@@ -515,6 +558,24 @@ function mapPromotionStateLabel_(promotionState) {
     case 'Missing DEV': return 'Missing DEV governance';
     case 'Blocked': return 'Blocked';
     default: return 'Unknown';
+  }
+}
+
+function mapHealthStateLabel_(healthStatus) {
+  switch (healthStatus) {
+    case 'Operational': return 'Operational';
+    case 'Needs Work': return 'Needs Work';
+    case 'Broken': return 'Broken';
+    default: return 'Unknown';
+  }
+}
+
+function mapHealthStateClass_(healthStatus) {
+  switch (healthStatus) {
+    case 'Operational': return 'operational';
+    case 'Needs Work': return 'needs-work';
+    case 'Broken': return 'broken';
+    default: return 'unknown';
   }
 }
 

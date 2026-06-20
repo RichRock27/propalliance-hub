@@ -55,6 +55,10 @@
     .badge.warn { color: var(--amber); border-color: #f7d98b; background: var(--amber-soft); }
     .badge.danger { color: var(--red); border-color: #ffc9c4; background: var(--red-soft); }
     .badge.legacy { color: var(--violet); border-color: #d8c7ff; background: var(--violet-soft); }
+    .badge.operational { color: var(--green); border-color: #bdebd0; background: var(--green-soft); }
+    .badge.needs-work { color: var(--amber); border-color: #f7d98b; background: var(--amber-soft); }
+    .badge.broken { color: var(--red); border-color: #ffc9c4; background: var(--red-soft); }
+    .badge.unknown { color: var(--muted); border-color: #dbe4ef; background: #f8fafc; }
 
     .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
     .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
@@ -75,6 +79,10 @@
     .section-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 6px; }
     .mini-list { display: grid; gap: 8px; }
     .mini-card { border: 1px solid var(--line); background: #fbfdff; border-radius: var(--radius); padding: 10px 11px; }
+    .mini-card.health-operational { border-color: #bdebd0; background: linear-gradient(180deg, #f4fdf7 0%, #fbfffc 100%); }
+    .mini-card.health-needs-work { border-color: #f7d98b; background: linear-gradient(180deg, #fffaf0 0%, #fffcf6 100%); }
+    .mini-card.health-broken { border-color: #ffc9c4; background: linear-gradient(180deg, #fff6f5 0%, #fffdfd 100%); }
+    .mini-card.health-unknown { border-color: var(--line); background: #fbfdff; }
     .mini-card-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
     .mini-card h5 { margin: 0; font-size: 0.9rem; }
     .mini-card .meta { color: var(--muted); font-size: 0.76rem; margin-top: 3px; }
@@ -108,6 +116,13 @@
 
     .project-list { display: grid; gap: 10px; }
     .project-row { overflow: hidden; }
+    .project-row.health-operational { border-left: 7px solid var(--green); background: linear-gradient(90deg, #edfdf3 0%, #ffffff 24%); box-shadow: inset 0 0 0 1px #c8efd6; }
+    .project-row.health-operational .project-summary { background: linear-gradient(90deg, #edfdf3 0%, #ffffff 24%); }
+    .project-row.health-needs-work { border-left: 7px solid var(--amber); background: linear-gradient(90deg, #fff7e8 0%, #ffffff 24%); box-shadow: inset 0 0 0 1px #f4d99a; }
+    .project-row.health-needs-work .project-summary { background: linear-gradient(90deg, #fff7e8 0%, #ffffff 24%); }
+    .project-row.health-broken { border-left: 7px solid var(--red); background: linear-gradient(90deg, #fff0ef 0%, #ffffff 24%); box-shadow: inset 0 0 0 1px #f4b4ae; }
+    .project-row.health-broken .project-summary { background: linear-gradient(90deg, #fff0ef 0%, #ffffff 24%); }
+    .project-row.health-unknown { border-left: 5px solid var(--line); }
     .project-summary { display: grid; grid-template-columns: minmax(220px, 1.15fr) minmax(230px, 1fr) minmax(230px, 1fr) minmax(180px, 0.8fr) 130px; gap: 12px; align-items: start; padding: 13px 14px; }
     .project-name { min-width: 0; }
     .project-name h4 { margin: 0; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -128,6 +143,10 @@
     .project-row.open .details { display: block; }
     .detail-stack { display: grid; gap: 12px; }
     .work-card { border: 1px solid var(--line); background: #fff; border-radius: var(--radius); padding: 12px; }
+    .work-card.health-operational { border-color: #bdebd0; background: linear-gradient(180deg, #f4fdf7 0%, #ffffff 30%); }
+    .work-card.health-needs-work { border-color: #f7d98b; background: linear-gradient(180deg, #fffaf0 0%, #ffffff 30%); }
+    .work-card.health-broken { border-color: #ffc9c4; background: linear-gradient(180deg, #fff6f5 0%, #ffffff 30%); }
+    .work-card.health-unknown { border-color: var(--line); }
     .work-card-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 10px; }
     .work-card-head h5 { margin: 0; font-size: 0.9rem; }
     .preset-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
@@ -403,6 +422,7 @@
     const WORK_OPTIONS = {
       workingTruths: ['DEV', 'LIVE', 'Unknown'],
       promotionStates: ['In Sync', 'DEV In Progress', 'Awaiting Approval', 'Ready to Promote', 'Approved but not promoted', 'LIVE Only', 'Missing DEV', 'Blocked', 'Unknown'],
+      healthStates: ['Operational', 'Needs Work', 'Broken', 'Unknown'],
       syncStates: ['Current', 'Behind', 'Unknown', 'Missing'],
       confidenceStates: ['High', 'Medium', 'Low', 'Unknown']
     };
@@ -552,41 +572,94 @@
     function workSummaryCell(label, value) {
       return '<div class="state-item"><div class="k">' + esc(label) + '</div><div class="v">' + esc(valueOr(value)) + '</div></div>';
     }
+    function healthStateLabel(value) {
+      switch (value) {
+        case 'Operational': return 'Operational';
+        case 'Needs Work': return 'Needs Work';
+        case 'Broken': return 'Broken';
+        default: return 'Unknown';
+      }
+    }
+    function healthStateClass(value) {
+      switch (value) {
+        case 'Operational': return 'operational';
+        case 'Needs Work': return 'needs-work';
+        case 'Broken': return 'broken';
+        default: return 'unknown';
+      }
+    }
+    function deriveClientHealthStatus(project) {
+      const work = project.workState || {};
+      const derived = project.derived || {};
+      const g = project.governance || {};
+      const hasDev = !!(project.devUrl || project.devScriptUrl);
+      const hasLive = !!(project.liveUrl || project.liveScriptUrl);
+      const promotionState = String(work.promotionState || derived.promotionState || 'Unknown');
+      const sync = work.syncState || {};
+      const saved = String(work.healthStatus || derived.healthStatus || '').trim();
+      if (saved && saved !== 'Unknown') return saved;
+      if (g.manualReviewRequired || promotionState === 'Blocked') return 'Broken';
+      if (!hasDev && hasLive) return 'Broken';
+      if (!hasDev && !hasLive) return 'Broken';
+      if (promotionState === 'Missing DEV') return 'Broken';
+      if (promotionState === 'Awaiting Approval' || promotionState === 'Ready to Promote' || promotionState === 'Approved but not promoted') return 'Needs Work';
+      if (promotionState === 'DEV In Progress') return 'Needs Work';
+      if (sync.live === 'Behind' || sync.dev === 'Behind' || sync.local === 'Behind' || sync.github === 'Behind') return 'Needs Work';
+      if (promotionState === 'In Sync') return 'Operational';
+      if (hasDev && hasLive) return 'Needs Work';
+      return 'Unknown';
+    }
+    function resolvedHealth(project) {
+      const status = deriveClientHealthStatus(project);
+      return {
+        healthStatus: status,
+        healthLabel: healthStateLabel(status),
+        healthClass: healthStateClass(status)
+      };
+    }
     function renderMiniCard(project) {
       const work = project.workState || {};
       const derived = project.derived || {};
-      return '<div class="mini-card">' +
+      const health = resolvedHealth(project);
+      return '<div class="mini-card health-' + esc(health.healthClass) + '">' +
         '<div class="mini-card-top"><div><h5>' + esc(project.projectName) + '</h5><div class="meta">' + esc(project.category || 'Uncategorized') + ' | ' + esc(derived.syncOverview || 'Unknown') + '</div></div><div class="badges">' + projectBadges(project) + '</div></div>' +
         '<div class="line"><strong>Last</strong>' + esc(valueOr(work.lastActionSummary, 'No action saved yet')) + '</div>' +
         '<div class="line"><strong>Next</strong>' + esc(valueOr(work.nextActionSummary, 'No next step saved yet')) + '</div>' +
-        '<div class="pill-row">' + badge(derived.promotionStateLabel || 'Unknown') + badge('Truth: ' + valueOr(work.workingTruth, 'Unknown'), work.workingTruth === 'DEV' ? 'dev' : (work.workingTruth === 'LIVE' ? 'live' : '')) + badge('Confidence: ' + valueOr(work.confidence, 'Unknown')) + '</div>' +
+        '<div class="pill-row">' + badge(health.healthLabel || 'Unknown', health.healthClass || 'unknown') + badge(derived.promotionStateLabel || 'Unknown') + badge('Truth: ' + valueOr(work.workingTruth, 'Unknown'), work.workingTruth === 'DEV' ? 'dev' : (work.workingTruth === 'LIVE' ? 'live' : '')) + badge('Confidence: ' + valueOr(work.confidence, 'Unknown')) + '</div>' +
       '</div>';
     }
     function workCard(project) {
       const work = project.workState || {};
       const derived = project.derived || {};
-      return '<div class="work-card">' +
+      const health = resolvedHealth(project);
+      return '<div class="work-card health-' + esc(health.healthClass) + '">' +
         '<div class="work-card-head"><h5>Current Working State</h5><div class="badges">' + projectBadges(project) + '</div></div>' +
         '<div class="preset-bar">' +
           '<button type="button" class="btn dev" data-preset="working-dev">Working in DEV</button>' +
           '<button type="button" class="btn" data-preset="awaiting-approval">Awaiting Approval</button>' +
           '<button type="button" class="btn" data-preset="ready-promote">Ready to Promote</button>' +
           '<button type="button" class="btn primary" data-preset="promoted">Promoted</button>' +
+          '<button type="button" class="btn" data-preset="operational">Operational</button>' +
+          '<button type="button" class="btn" data-preset="needs-work">Needs Work</button>' +
+          '<button type="button" class="btn" data-preset="broken">Broken</button>' +
           '<button type="button" class="btn" data-preset="blocked">Blocked</button>' +
           '<button type="button" class="btn" data-preset="missing-dev">Missing DEV</button>' +
         '</div>' +
         '<div class="work-summary-grid">' +
           workSummaryCell('Operating State', derived.operatingStateLabel || '') +
           workSummaryCell('Promotion State', derived.promotionStateLabel || '') +
+          workSummaryCell('Project Health', health.healthLabel || 'Unknown') +
           workSummaryCell('Sync Summary', derived.syncOverview || '') +
           workSummaryCell('Last Worked', toDateText(work.lastWorkedAt)) +
           workSummaryCell('Last Action', work.lastActionSummary || '') +
           workSummaryCell('Next Action', work.nextActionSummary || '') +
+          workSummaryCell('Needs Work', work.healthNotes || '') +
         '</div>' +
         '<div class="work-form-grid">' +
           '<label>Current Focus<input type="text" data-work-field="currentFocus" value="' + esc(work.currentFocus || '') + '"></label>' +
           '<label>Working Truth<select data-work-field="workingTruth">' + optionHtml(WORK_OPTIONS.workingTruths, work.workingTruth || 'Unknown') + '</select></label>' +
           '<label>Promotion State<select data-work-field="promotionState">' + optionHtml(WORK_OPTIONS.promotionStates, work.promotionState || 'Unknown') + '</select></label>' +
+          '<label>Project Health<select data-work-field="healthStatus">' + optionHtml(WORK_OPTIONS.healthStates, work.healthStatus || health.healthStatus || 'Unknown') + '</select></label>' +
           '<label>Sync: LIVE<select data-work-field="sync-live">' + optionHtml(WORK_OPTIONS.syncStates, (work.syncState && work.syncState.live) || 'Unknown') + '</select></label>' +
           '<label>Sync: DEV<select data-work-field="sync-dev">' + optionHtml(WORK_OPTIONS.syncStates, (work.syncState && work.syncState.dev) || 'Unknown') + '</select></label>' +
           '<label>Confidence<select data-work-field="confidence">' + optionHtml(WORK_OPTIONS.confidenceStates, work.confidence || 'Unknown') + '</select></label>' +
@@ -594,6 +667,7 @@
           '<label>Sync: GitHub<select data-work-field="sync-github">' + optionHtml(WORK_OPTIONS.syncStates, (work.syncState && work.syncState.github) || 'Unknown') + '</select></label>' +
           '<label>Last Action<textarea data-work-field="lastActionSummary">' + esc(work.lastActionSummary || '') + '</textarea></label>' +
           '<label>Next Action<textarea data-work-field="nextActionSummary">' + esc(work.nextActionSummary || '') + '</textarea></label>' +
+          '<label style="grid-column: 1 / -1;">What still needs work<textarea data-work-field="healthNotes">' + esc(work.healthNotes || '') + '</textarea></label>' +
           '<label style="grid-column: 1 / -1;">Notes<textarea data-work-field="notes">' + esc(work.notes || '') + '</textarea></label>' +
         '</div>' +
         '<div class="work-actions"><div class="save-status" data-save-status>Last updated by ' + esc(valueOr(work.updatedBy, 'nobody yet')) + ' | ' + esc(toDateText(work.updatedAt)) + '</div><button type="button" class="btn primary" data-save-work="' + esc(project.projectSlug) + '">Save Working State</button></div>' +
@@ -603,15 +677,16 @@
       const g = project.governance || {};
       const work = project.workState || {};
       const derived = project.derived || {};
+      const health = resolvedHealth(project);
       const groups = buildLinkGroups(project);
       const notes = [project.notes, g.notes].filter(Boolean).join(' | ');
       const totalLinks = groups.live.length + groups.dev.length + groups.files.length;
-      return '<article class="project-row panel ' + (startOpen ? 'open' : '') + '">' +
+      return '<article class="project-row panel health-' + esc(health.healthClass) + ' ' + (startOpen ? 'open' : '') + '">' +
         '<div class="project-summary">' +
           '<div class="project-name"><h4 title="' + esc(project.projectName) + '">' + esc(project.projectName) + '</h4><div class="sub">' + esc(project.category || 'Uncategorized') + ' | Registry row ' + esc(project.registryRow || '') + '</div></div>' +
-          '<div class="project-state"><div class="state-line">' + badge(derived.promotionStateLabel || 'Unknown') + badge(derived.syncOverview || 'Unknown') + '</div><div class="summary-copy"><span class="key">Last</span>' + esc(valueOr(work.lastActionSummary, 'No action saved')) + '</div></div>' +
+          '<div class="project-state"><div class="state-line">' + badge(health.healthLabel || 'Unknown', health.healthClass || 'unknown') + badge(derived.promotionStateLabel || 'Unknown') + badge(derived.syncOverview || 'Unknown') + '</div><div class="summary-copy"><span class="key">Last</span>' + esc(valueOr(work.lastActionSummary, 'No action saved')) + '</div></div>' +
           '<div class="project-state"><div class="state-line">' + projectBadges(project) + '</div><div class="summary-copy"><span class="key">Next</span>' + esc(valueOr(work.nextActionSummary, 'No next action saved')) + '</div></div>' +
-          '<div class="project-state updated"><div class="summary-copy"><span class="key">Worked</span>' + esc(toDateText(work.lastWorkedAt)) + '</div><div class="summary-copy"><span class="key">Registry Checked</span>' + esc(valueOr(project.lastVerified, 'Not checked')) + '</div></div>' +
+          '<div class="project-state updated"><div class="summary-copy"><span class="key">Worked</span>' + esc(toDateText(work.lastWorkedAt)) + '</div><div class="summary-copy"><span class="key">Registry Checked</span>' + esc(valueOr(project.lastVerified, 'Not checked')) + '</div><div class="summary-copy"><span class="key">Needs Work</span>' + esc(valueOr(work.healthNotes, 'No notes saved')) + '</div></div>' +
           '<div class="quick-actions">' + linkButton('LIVE', project.liveUrl, 'primary') + linkButton('DEV', project.devUrl, 'dev') + copyCommandButton('Push Local → DEV', buildLocalToDevCommand(project), 'dev') + copyCommandButton('DEV → LIVE', buildDevToLiveCommand(project), 'primary') + copyCommandButton('Push to GitHub', buildGitHubCommand(project), '') + '</div>' +
           '<button class="btn toggle" data-toggle="' + esc(project.projectSlug) + '">' + totalLinks + ' links</button>' +
         '</div>' +
@@ -781,6 +856,8 @@
         currentFocus: '',
         workingTruth: 'Unknown',
         promotionState: 'Unknown',
+        healthStatus: 'Unknown',
+        healthNotes: '',
         confidence: 'Unknown',
         syncState: { live: 'Unknown', dev: 'Unknown', local: 'Unknown', github: 'Unknown' },
         notes: ''
@@ -843,14 +920,28 @@
           'sync-github': 'Current',
           confidence: 'High'
         },
+        'operational': {
+          healthStatus: 'Operational',
+          confidence: 'High'
+        },
+        'needs-work': {
+          healthStatus: 'Needs Work',
+          confidence: 'Medium'
+        },
+        'broken': {
+          healthStatus: 'Broken',
+          confidence: 'Low'
+        },
         'blocked': {
           promotionState: 'Blocked',
+          healthStatus: 'Broken',
           confidence: 'Medium'
         },
         'missing-dev': {
           workingTruth: 'LIVE',
           promotionState: 'Missing DEV',
           'sync-dev': 'Missing',
+          healthStatus: 'Broken',
           confidence: 'Medium'
         }
       }[preset];
