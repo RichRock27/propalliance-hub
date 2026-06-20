@@ -493,7 +493,6 @@ function deriveHubDefaultHealthStatus_(project, context) {
   if (promotionState === 'Awaiting Approval' || promotionState === 'Ready to Promote' || promotionState === 'Approved but not promoted') return 'Needs Work';
   if (sync.live === 'Behind' || sync.dev === 'Behind' || sync.github === 'Behind' || sync.local === 'Behind') return 'Needs Work';
   if (promotionState === 'DEV In Progress') return 'Needs Work';
-  if (promotionState === 'In Sync' && sync.live !== 'Behind' && sync.dev !== 'Behind') return 'Operational';
   if (hasDev && hasLive) return 'Needs Work';
   return 'Unknown';
 }

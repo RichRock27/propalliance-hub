@@ -129,6 +129,11 @@
     .project-name .sub { color: var(--muted); font-size: 0.78rem; margin-top: 3px; }
     .project-state { min-width: 0; }
     .state-line { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .health-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .health-actions .btn { padding: 5px 9px; min-height: 28px; font-size: 0.72rem; }
+    .health-actions .btn.health-operational { background: var(--green-soft); border-color: #bdebd0; color: var(--green); }
+    .health-actions .btn.health-needs-work { background: var(--amber-soft); border-color: #f7d98b; color: var(--amber); }
+    .health-actions .btn.health-broken { background: var(--red-soft); border-color: #ffc9c4; color: var(--red); }
     .summary-copy { color: var(--ink); font-size: 0.82rem; line-height: 1.35; margin-top: 8px; }
     .summary-copy .key { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; font-weight: 800; margin-right: 6px; }
     .badges { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -605,7 +610,6 @@
       if (promotionState === 'Awaiting Approval' || promotionState === 'Ready to Promote' || promotionState === 'Approved but not promoted') return 'Needs Work';
       if (promotionState === 'DEV In Progress') return 'Needs Work';
       if (sync.live === 'Behind' || sync.dev === 'Behind' || sync.local === 'Behind' || sync.github === 'Behind') return 'Needs Work';
-      if (promotionState === 'In Sync') return 'Operational';
       if (hasDev && hasLive) return 'Needs Work';
       return 'Unknown';
     }
@@ -684,7 +688,7 @@
       return '<article class="project-row panel health-' + esc(health.healthClass) + ' ' + (startOpen ? 'open' : '') + '">' +
         '<div class="project-summary">' +
           '<div class="project-name"><h4 title="' + esc(project.projectName) + '">' + esc(project.projectName) + '</h4><div class="sub">' + esc(project.category || 'Uncategorized') + ' | Registry row ' + esc(project.registryRow || '') + '</div></div>' +
-          '<div class="project-state"><div class="state-line">' + badge(health.healthLabel || 'Unknown', health.healthClass || 'unknown') + badge(derived.promotionStateLabel || 'Unknown') + badge(derived.syncOverview || 'Unknown') + '</div><div class="summary-copy"><span class="key">Last</span>' + esc(valueOr(work.lastActionSummary, 'No action saved')) + '</div></div>' +
+          '<div class="project-state"><div class="state-line">' + badge(health.healthLabel || 'Unknown', health.healthClass || 'unknown') + badge(derived.promotionStateLabel || 'Unknown') + badge(derived.syncOverview || 'Unknown') + '</div><div class="health-actions"><button type="button" class="btn health-operational" data-health-set="Operational">Operational</button><button type="button" class="btn health-needs-work" data-health-set="Needs Work">Needs Work</button><button type="button" class="btn health-broken" data-health-set="Broken">Broken</button></div><div class="summary-copy"><span class="key">Last</span>' + esc(valueOr(work.lastActionSummary, 'No action saved')) + '</div></div>' +
           '<div class="project-state"><div class="state-line">' + projectBadges(project) + '</div><div class="summary-copy"><span class="key">Next</span>' + esc(valueOr(work.nextActionSummary, 'No next action saved')) + '</div></div>' +
           '<div class="project-state updated"><div class="summary-copy"><span class="key">Worked</span>' + esc(toDateText(work.lastWorkedAt)) + '</div><div class="summary-copy"><span class="key">Registry Checked</span>' + esc(valueOr(project.lastVerified, 'Not checked')) + '</div><div class="summary-copy"><span class="key">Needs Work</span>' + esc(valueOr(work.healthNotes, 'No notes saved')) + '</div></div>' +
           '<div class="quick-actions">' + linkButton('LIVE', project.liveUrl, 'primary') + linkButton('DEV', project.devUrl, 'dev') + copyCommandButton('Push Local → DEV', buildLocalToDevCommand(project), 'dev') + copyCommandButton('DEV → LIVE', buildDevToLiveCommand(project), 'primary') + copyCommandButton('Push to GitHub', buildGitHubCommand(project), '') + '</div>' +
@@ -840,11 +844,6 @@
     function saveProjectWorkState(button) {
       const row = button.closest('.project-row');
       if (!row) return;
-      if (!window.google || !google.script || !google.script.run) {
-        const status = row.querySelector('[data-save-status]');
-        if (status) status.textContent = 'Save only works in the deployed Hub.';
-        return;
-      }
       const slug = button.getAttribute('data-save-work');
       const project = PROJECTS.find(item => item.projectSlug === slug);
       if (!project) return;
@@ -871,6 +870,26 @@
         else if (key === 'sync-github') payload.syncState.github = value;
         else payload[key] = value;
       });
+      if (!window.google || !google.script || !google.script.run) {
+        const updatedProject = {
+          ...project,
+          workState: {
+            ...(project.workState || {}),
+            ...payload,
+            updatedAt: new Date().toISOString(),
+            updatedBy: 'local-preview'
+          },
+          derived: {
+            ...(project.derived || {}),
+            healthStatus: payload.healthStatus || 'Unknown',
+            healthLabel: healthStateLabel(payload.healthStatus || 'Unknown'),
+            healthClass: healthStateClass(payload.healthStatus || 'Unknown')
+          }
+        };
+        PROJECTS = PROJECTS.map(item => item.projectSlug === slug ? updatedProject : item);
+        renderAll();
+        return;
+      }
       button.classList.add('disabled');
       const status = row.querySelector('[data-save-status]');
       if (status) status.textContent = 'Saving working state...';
@@ -953,6 +972,15 @@
       const status = row.querySelector('[data-save-status]');
       if (status) status.textContent = 'Preset applied. Review anything project-specific, then save.';
     }
+    function applyHealthSelection(button) {
+      const row = button.closest('.project-row');
+      if (!row) return;
+      const statusValue = button.getAttribute('data-health-set');
+      const field = row.querySelector('[data-work-field="healthStatus"]');
+      if (field) field.value = statusValue || 'Unknown';
+      const saveButton = row.querySelector('button[data-save-work]');
+      if (saveButton) saveProjectWorkState(saveButton);
+    }
     function wireControls() {
       document.body.addEventListener('click', event => {
         const navBtn = event.target.closest('button[data-section]');
@@ -981,6 +1009,11 @@
         const preset = event.target.closest('[data-preset]');
         if (preset) {
           applyPreset(preset);
+          return;
+        }
+        const healthSet = event.target.closest('[data-health-set]');
+        if (healthSet) {
+          applyHealthSelection(healthSet);
           return;
         }
         const copy = event.target.closest('[data-copy]');
