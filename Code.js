@@ -30,6 +30,8 @@ const HUB_HEALTH_STATES = [
 const HUB_WORKING_TRUTHS = ['DEV', 'LIVE', 'Unknown'];
 const HUB_SYNC_STATES = ['Current', 'Behind', 'Unknown', 'Missing'];
 const HUB_CONFIDENCE_STATES = ['High', 'Medium', 'Low', 'Unknown'];
+const HUB_LAUNCHPAD_VISIBILITY_STATES = ['both', 'supervisor', 'property-manager', 'hidden'];
+const HUB_LAUNCHPAD_PINNED_STATES = ['Pinned', 'Not Pinned'];
 
 /**
  * Serves the Web App UI
@@ -62,11 +64,12 @@ function doGet(e) {
       .setMimeType(ContentService.MimeType.JSON);
   }
 
-  const mode = (e && e.parameter && e.parameter.mode) || 'admin';
+  const mode = normalizeHubMode_((e && e.parameter && e.parameter.mode) || 'admin');
   const template = HtmlService.createTemplateFromFile('index');
   
   template.mode = mode;
   template.isUser = (mode === 'user');
+  template.launchpadLibraryJson = JSON.stringify(getLaunchpadLibrary_());
   
   return template.evaluate()
     .setTitle('PropAlliance Hub')
@@ -82,11 +85,18 @@ function getHubData() {
 }
 
 function getRegistryHubData() {
+  return getRegistryHubDataForMode('admin');
+}
+
+function getRegistryHubDataForMode(mode) {
+  var normalizedMode = normalizeHubMode_(mode);
   var snapshot = getRegistrySnapshot();
   var user = getCurrentHubUser_();
   var memoryMap = getHubProjectMemoryMap_();
   var enrichedProjects = enrichHubProjects_(snapshot.projects || [], memoryMap, user);
-  var projects = filterProjectsForRole_(enrichedProjects, user);
+  var projects = normalizedMode === 'admin'
+    ? filterProjectsForRole_(enrichedProjects, user)
+    : filterProjectsForLaunchpadMode_(enrichedProjects, normalizedMode);
 
   return {
     generatedAt: snapshot.generatedAt,
@@ -97,10 +107,21 @@ function getRegistryHubData() {
     deploymentCount: snapshot.deploymentCount,
     phase: snapshot.phase,
     safety: snapshot.safety,
-    user: user,
+    user: Object.assign({}, user, { hubMode: normalizedMode }),
     summary: buildHubSummary_(projects),
     projects: projects
   };
+}
+
+function normalizeHubMode_(mode) {
+  var value = String(mode || 'admin').toLowerCase().replace(/_/g, '-').trim();
+  if (value === 'supervisor' || value === 'supervisors') return 'supervisor';
+  if (value === 'pm' || value === 'pms' || value === 'property-manager' || value === 'property-managers' || value === 'propertymanager') return 'property-manager';
+  return 'admin';
+}
+
+function getLaunchpadLibrary_() {
+  return typeof LAUNCHPAD_LIBRARY === 'undefined' || !LAUNCHPAD_LIBRARY ? {} : LAUNCHPAD_LIBRARY;
 }
 
 function saveProjectWorkState(payload) {
@@ -132,7 +153,9 @@ function getHubProjectWorkStateOptions() {
     healthStates: HUB_HEALTH_STATES.slice(),
     workingTruths: HUB_WORKING_TRUTHS.slice(),
     syncStates: HUB_SYNC_STATES.slice(),
-    confidenceStates: HUB_CONFIDENCE_STATES.slice()
+    confidenceStates: HUB_CONFIDENCE_STATES.slice(),
+    launchpadVisibilityStates: HUB_LAUNCHPAD_VISIBILITY_STATES.slice(),
+    launchpadPinnedStates: HUB_LAUNCHPAD_PINNED_STATES.slice()
   };
 }
 
@@ -202,6 +225,47 @@ function filterProjectsForRole_(projects, user) {
         }
       };
     });
+}
+
+function filterProjectsForLaunchpadMode_(projects, mode) {
+  var normalizedMode = normalizeHubMode_(mode);
+  return (projects || []).filter(function(project) {
+    if (!project || !(project.liveUrl || project.liveScriptUrl)) return false;
+    var visibility = project.workState && project.workState.launchpadVisibility;
+    if (!visibility || visibility === 'Unknown') visibility = deriveHubDefaultLaunchpadVisibility_(project);
+    if (visibility === 'hidden') return false;
+    if (visibility === 'both') return true;
+    if (normalizedMode === 'supervisor') return visibility === 'supervisor';
+    if (normalizedMode === 'property-manager') return visibility === 'property-manager';
+    return false;
+  }).map(function(project) {
+    return {
+      projectId: project.projectId,
+      projectName: project.projectName,
+      projectSlug: project.projectSlug,
+      category: project.category,
+      status: project.status,
+      liveUrl: project.liveUrl,
+      liveScriptUrl: project.liveScriptUrl,
+      notes: project.notes,
+      lastVerified: project.lastVerified,
+      deployments: project.deployments || [],
+      anchorFolderUrl: project.anchorFolderUrl,
+      workState: {
+        launchpadVisibility: project.workState && project.workState.launchpadVisibility,
+        launchpadPinned: project.workState && project.workState.launchpadPinned,
+        updatedAt: project.workState && project.workState.updatedAt,
+        lastWorkedAt: project.workState && project.workState.lastWorkedAt
+      },
+      derived: project.derived || {},
+      governance: {
+        legacy: project.governance && project.governance.legacy,
+        readOnly: project.governance && project.governance.readOnly,
+        staleLive: project.governance && project.governance.staleLive,
+        notes: project.governance && project.governance.notes
+      }
+    };
+  });
 }
 
 function buildHubSummary_(projects) {
@@ -278,6 +342,8 @@ function normalizeHubWorkStateInput_(input, user) {
     promotionState: pickEnum(input.promotionState, HUB_PROMOTION_STATES, 'Unknown'),
     healthStatus: pickEnum(input.healthStatus, HUB_HEALTH_STATES, 'Unknown'),
     confidence: pickEnum(input.confidence, HUB_CONFIDENCE_STATES, 'Unknown'),
+    launchpadVisibility: pickEnum(input.launchpadVisibility, HUB_LAUNCHPAD_VISIBILITY_STATES, 'hidden'),
+    launchpadPinned: pickEnum(input.launchpadPinned, HUB_LAUNCHPAD_PINNED_STATES, 'Not Pinned'),
     syncState: {
       live: pickEnum(syncInput.live, HUB_SYNC_STATES, 'Unknown'),
       dev: pickEnum(syncInput.dev, HUB_SYNC_STATES, 'Unknown'),
@@ -343,6 +409,8 @@ function buildHubWorkState_(project, memory) {
     promotionState: promotionState,
     healthStatus: healthStatus,
     confidence: memory.confidence || autoConfidence,
+    launchpadVisibility: memory.launchpadVisibility || deriveHubDefaultLaunchpadVisibility_(project),
+    launchpadPinned: memory.launchpadPinned || (project && project.launchpadPinned ? 'Pinned' : 'Not Pinned'),
     syncState: {
       live: syncState.live || (hasLive ? 'Unknown' : 'Missing'),
       dev: syncState.dev || (hasDev ? 'Unknown' : 'Missing'),
@@ -356,6 +424,45 @@ function buildHubWorkState_(project, memory) {
     repoPresent: repoPresent,
     localConfigured: localConfigured
   };
+}
+
+function deriveHubDefaultLaunchpadVisibility_(project) {
+  var meta = findLaunchpadMetaForProject_(project);
+  var roles = meta && meta.roles ? meta.roles : [];
+  var hasSupervisor = roles.indexOf('supervisor') !== -1;
+  var hasPropertyManager = roles.indexOf('property-manager') !== -1;
+  if (hasSupervisor && hasPropertyManager) return 'both';
+  if (hasSupervisor) return 'supervisor';
+  if (hasPropertyManager) return 'property-manager';
+  return 'hidden';
+}
+
+function findLaunchpadMetaForProject_(project) {
+  if (typeof LAUNCHPAD_LIBRARY === 'undefined' || !LAUNCHPAD_LIBRARY) return null;
+  var projectNames = [];
+  if (project && project.projectName) projectNames.push(normalizeHubText_(project.projectName));
+  if (project && project.projectSlug) projectNames.push(normalizeHubText_(project.projectSlug));
+  var groups = Object.keys(LAUNCHPAD_LIBRARY).map(function(key) {
+    return LAUNCHPAD_LIBRARY[key];
+  }).filter(Boolean);
+  for (var i = 0; i < groups.length; i++) {
+    var cfg = groups[i];
+    var metas = (cfg && cfg.projects) || [];
+    for (var j = 0; j < metas.length; j++) {
+      var meta = metas[j] || {};
+      var candidates = [meta.name].concat(meta.aliases || []).filter(Boolean).map(function(value) {
+        return normalizeHubText_(value);
+      });
+      for (var k = 0; k < projectNames.length; k++) {
+        if (candidates.indexOf(projectNames[k]) !== -1) return meta;
+      }
+    }
+  }
+  return null;
+}
+
+function normalizeHubText_(value) {
+  return String(value == null ? '' : value).toLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
 function deriveHubAutoLastWorkedAt_(project, memory) {

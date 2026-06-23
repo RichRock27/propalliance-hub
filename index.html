@@ -103,6 +103,43 @@
     .help-block li { margin: 0 0 6px; font-size: 0.82rem; line-height: 1.35; }
     .help-block li:last-child { margin-bottom: 0; }
 
+    .launchpad-hero { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 12px; padding: 14px; margin-bottom: 12px; }
+    .launchpad-hero h4 { margin: 0 0 4px; font-size: 1rem; }
+    .launchpad-hero p { margin: 0; color: var(--muted); font-size: 0.85rem; line-height: 1.45; }
+    .launchpad-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .launchpad-stat-grid .sub { margin-top: 4px; color: var(--muted); font-size: 0.72rem; line-height: 1.35; }
+    .launchpad-toolbar { display: grid; grid-template-columns: minmax(280px, 1fr) 180px auto; gap: 10px; padding: 12px; margin-bottom: 12px; align-items: center; }
+    .role-switcher { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .role-switcher .btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .launchpad-list { display: grid; gap: 12px; }
+    .launchpad-section { display: grid; gap: 10px; }
+    .launchpad-section h5 { margin: 0; font-size: 0.9rem; }
+    .launchpad-section .section-note { color: var(--muted); font-size: 0.8rem; line-height: 1.4; margin-top: 2px; }
+    .launchpad-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .launchpad-card { padding: 14px; border-radius: var(--radius); border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .launchpad-card.shared { border-left: 6px solid var(--blue); }
+    .launchpad-card.supervisor { border-left: 6px solid var(--green); }
+    .launchpad-card.property-manager { border-left: 6px solid var(--violet); }
+    .launchpad-card-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .launchpad-card h5 { margin: 0; font-size: 1rem; }
+    .launchpad-card .sub { color: var(--muted); font-size: 0.78rem; margin-top: 4px; }
+    .launchpad-card .desc { margin-top: 10px; font-size: 0.86rem; line-height: 1.45; color: var(--ink); }
+    .launchpad-card .use { margin-top: 8px; font-size: 0.82rem; line-height: 1.4; color: #30445f; }
+    .launchpad-card .meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .launchpad-card .footer-row { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
+    .launchpad-card .sync-note { color: var(--muted); font-size: 0.78rem; }
+    .launchpad-card .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .launchpad-card .btn { min-height: 32px; padding: 7px 10px; }
+    .launchpad-empty { padding: 16px; color: var(--muted); font-size: 0.86rem; }
+    .launchpad-legend { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; margin-bottom: 12px; }
+    .launchpad-legend .legend-note { color: var(--muted); font-size: 0.8rem; line-height: 1.35; }
+
+    body.launchpad-mode .shell { grid-template-columns: 1fr; }
+    body.launchpad-mode .sidebar { display: none; }
+    body.launchpad-mode .main { padding: 18px 22px 26px; }
+    body.launchpad-mode .topbar { display: none; }
+    body.public-launchpad-mode .role-switcher { display: none; }
+
     .toolbar { display: grid; grid-template-columns: minmax(260px, 1fr) repeat(3, minmax(145px, 185px)); gap: 10px; padding: 13px; margin-bottom: 14px; position: sticky; top: 0; z-index: 2; }
     input, select { width: 100%; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 11px; font: inherit; background: #fff; color: var(--ink); }
     textarea { width: 100%; min-height: 78px; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 11px; font: inherit; background: #fff; color: var(--ink); resize: vertical; }
@@ -196,6 +233,9 @@
       .quick-actions { justify-content: flex-start; }
       .link-columns { grid-template-columns: 1fr; }
       .state-grid { grid-template-columns: 1fr; }
+      .launchpad-hero, .launchpad-toolbar { grid-template-columns: 1fr; }
+      .launchpad-grid { grid-template-columns: 1fr; }
+      .role-switcher { justify-content: flex-start; }
     }
   </style>
 </head>
@@ -210,6 +250,7 @@
       <nav class="nav" id="nav">
         <button class="active" data-section="start">Start Here</button>
         <button data-section="dashboard">Dashboard</button>
+        <button data-section="launchpads">Role Launchpads</button>
         <button data-section="projects">All Projects</button>
         <button data-section="governance">Governance</button>
         <button data-section="deployments">Deployments</button>
@@ -239,8 +280,26 @@
           <div class="preset-bar">
             <button type="button" class="btn primary" data-section="projects">Open All Projects</button>
             <button type="button" class="btn" data-section="dashboard">Open Dashboard</button>
+            <button type="button" class="btn" data-section="launchpads">Preview Role Hubs</button>
             <button type="button" class="btn" data-section="governance">Check Approvals</button>
             <button type="button" class="btn" data-copy-global="backup-live">Copy Weekly Backup Command</button>
+          </div>
+        </div>
+
+        <div class="panel dashboard-section">
+          <h4>Role Hub links</h4>
+          <p>Use these when you want to give someone a filtered Hub instead of your full source-of-truth Hub.</p>
+          <div class="state-grid">
+            <div class="state-item">
+              <div class="k">Supervisor Hub</div>
+              <div class="v">Shows projects marked Supervisor Hub or Both Hubs.</div>
+              <div class="preset-bar" style="margin-top:10px;"><button type="button" class="btn" data-copy-role-url="supervisor">Copy Supervisor Hub Link</button></div>
+            </div>
+            <div class="state-item">
+              <div class="k">Property Manager Hub</div>
+              <div class="v">Shows projects marked Property Manager Hub or Both Hubs.</div>
+              <div class="preset-bar" style="margin-top:10px;"><button type="button" class="btn" data-copy-role-url="property-manager">Copy PM Hub Link</button></div>
+            </div>
           </div>
         </div>
 
@@ -290,6 +349,48 @@
             <div class="state-item"><div class="k">Need a reset?</div><div class="v">Run the weekly backup before a bigger change.</div></div>
           </div>
         </div>
+      </section>
+
+      <section id="launchpads" class="section">
+        <div class="section-head">
+          <div>
+            <h3>Role Launchpads</h3>
+            <p>Live-only menu views for Supervisors and Property Managers. Shared tools appear in both views. Change a project’s Hub visibility inside its Working State panel.</p>
+          </div>
+        </div>
+        <div class="panel launchpad-hero">
+          <div>
+            <h4 id="launchpad-title">Supervisor Launchpad</h4>
+            <p id="launchpad-intro">Live tools for oversight, review, triage, and team coordination.</p>
+            <div id="launchpad-view-label" class="sub">Previewing as Supervisor</div>
+            <div id="launchpad-audit" class="sub">Showing 0 visible and 0 hidden from this view.</div>
+          </div>
+          <div class="launchpad-stat-grid">
+            <div class="state-item"><div class="k">Visible Projects</div><div class="v" id="launchpad-count">0</div></div>
+            <div class="state-item"><div class="k">Hidden Projects</div><div class="v" id="launchpad-hidden">0</div></div>
+            <div class="state-item"><div class="k">Last Project Update Recorded</div><div class="v" id="launchpad-sync">Not recorded</div><div class="sub" id="launchpad-sync-note">Based on the newest saved project record in this view.</div></div>
+          </div>
+        </div>
+        <div class="panel launchpad-toolbar">
+          <input id="launchpad-search" placeholder="Search project name, description, or usage...">
+          <select id="launchpad-sort">
+            <option value="priority">Featured order</option>
+            <option value="alpha">Alphabetical</option>
+            <option value="recent">Most recently synced</option>
+          </select>
+          <div class="role-switcher">
+            <button type="button" class="btn active" data-launchpad-role="supervisor">Supervisor</button>
+            <button type="button" class="btn" data-launchpad-role="propertyManager">Property Manager</button>
+            <button type="button" class="btn" data-section="dashboard">Admin Hub</button>
+          </div>
+        </div>
+        <div class="panel launchpad-legend">
+          <span class="badge live">LIVE only</span>
+          <span class="badge legacy">Pinned</span>
+          <span class="badge warn">Visibility badge</span>
+          <span class="legend-note">LIVE only means the live version is the one this launchpad links to. Visibility shows which Hub(s) can see the project. Pinned items stay at the top.</span>
+        </div>
+        <div id="launchpad-list" class="launchpad-list"></div>
       </section>
 
       <section id="dashboard" class="section">
@@ -421,15 +522,22 @@
 
   <script src="RegistrySnapshot.js"></script>
   <script>
+    const HUB_MODE = normalizeHubMode('<?= mode ?>');
+    const LAUNCHPAD_LIBRARY = <?!= launchpadLibraryJson ?>;
     let HUB = null;
     let PROJECTS = [];
     let FILTERS = { search: '', category: '', status: '', flag: '' };
+    let LAUNCHPAD_ROLE = HUB_MODE === 'property-manager' ? 'propertyManager' : 'supervisor';
+    let LAUNCHPAD_SEARCH = '';
+    let LAUNCHPAD_SORT = 'priority';
     const WORK_OPTIONS = {
       workingTruths: ['DEV', 'LIVE', 'Unknown'],
       promotionStates: ['In Sync', 'DEV In Progress', 'Awaiting Approval', 'Ready to Promote', 'Approved but not promoted', 'LIVE Only', 'Missing DEV', 'Blocked', 'Unknown'],
       healthStates: ['Operational', 'Needs Work', 'Broken', 'Unknown'],
       syncStates: ['Current', 'Behind', 'Unknown', 'Missing'],
-      confidenceStates: ['High', 'Medium', 'Low', 'Unknown']
+      confidenceStates: ['High', 'Medium', 'Low', 'Unknown'],
+      launchpadVisibilityStates: ['both', 'supervisor', 'property-manager', 'hidden'],
+      launchpadPinnedStates: ['Pinned', 'Not Pinned']
     };
 
     function esc(value) {
@@ -507,6 +615,7 @@
       const out = [];
       if (project.liveUrl) out.push(badge('LIVE', 'live'));
       if (project.devUrl || project.devScriptUrl) out.push(badge('DEV', 'dev'));
+      if (launchpadPinnedForProject(project)) out.push(badge('Pinned', 'legacy'));
       if (g.missingDev || d.missingDev) out.push(badge('MISSING DEV', 'danger'));
       if (d.awaitingApproval) out.push(badge('REVIEW', 'warn'));
       if (d.outOfSync) out.push(badge('OUT OF SYNC', 'warn'));
@@ -574,8 +683,226 @@
     function optionHtml(values, current) {
       return values.map(value => '<option value="' + esc(value) + '"' + (value === current ? ' selected' : '') + '>' + esc(value) + '</option>').join('');
     }
+    function normalizeHubMode(value) {
+      const mode = String(value || 'admin').toLowerCase().replace(/_/g, '-').trim();
+      if (mode === 'supervisor' || mode === 'supervisors') return 'supervisor';
+      if (mode === 'pm' || mode === 'pms' || mode === 'property-manager' || mode === 'property-managers' || mode === 'propertymanager') return 'property-manager';
+      return 'admin';
+    }
+    function launchpadVisibilityLabel(value) {
+      switch (String(value || '').trim()) {
+        case 'both': return 'Both Hubs';
+        case 'supervisor': return 'Supervisor Hub';
+        case 'property-manager': return 'Property Manager Hub';
+        case 'hidden': return 'Hidden';
+        default: return 'Hidden';
+      }
+    }
+    function launchpadPinnedLabel(value) {
+      return String(value || '').trim() === 'Pinned' ? 'Pinned' : 'Not Pinned';
+    }
+    function launchpadVisibilityOptionHtml(current) {
+      return WORK_OPTIONS.launchpadVisibilityStates.map(value => {
+        return '<option value="' + esc(value) + '"' + (value === current ? ' selected' : '') + '>' + esc(launchpadVisibilityLabel(value)) + '</option>';
+      }).join('');
+    }
+    function roleHubUrl(mode) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('mode', normalizeHubMode(mode));
+      return url.toString();
+    }
+    function launchpadMetaForProject(project) {
+      const allGroups = Object.keys(LAUNCHPAD_LIBRARY || {}).map(key => LAUNCHPAD_LIBRARY[key]).filter(Boolean);
+      const names = [
+        project && project.projectName,
+        project && project.projectSlug
+      ].filter(Boolean).map(normalizeLaunchpadText);
+      for (const cfg of allGroups) {
+        for (const meta of (cfg.projects || [])) {
+          const candidates = [meta.name].concat(meta.aliases || []).filter(Boolean).map(normalizeLaunchpadText);
+          if (names.some(name => candidates.includes(name))) return meta;
+        }
+      }
+      return null;
+    }
+    function launchpadVisibilityForProject(project) {
+      const saved = String(project && project.workState && project.workState.launchpadVisibility || '').trim();
+      if (saved && saved !== 'Unknown') return saved;
+      const meta = launchpadMetaForProject(project);
+      const roles = (meta && meta.roles) || [];
+      const hasSupervisor = roles.includes('supervisor');
+      const hasPm = roles.includes('property-manager');
+      if (hasSupervisor && hasPm) return 'both';
+      if (hasSupervisor) return 'supervisor';
+      if (hasPm) return 'property-manager';
+      return 'hidden';
+    }
+    function launchpadVisibleForRole(project, role) {
+      const visibility = launchpadVisibilityForProject(project);
+      if (visibility === 'hidden') return false;
+      if (visibility === 'both') return true;
+      if (role === 'supervisor') return visibility === 'supervisor';
+      if (role === 'propertyManager') return visibility === 'property-manager';
+      return false;
+    }
+    function launchpadPinnedForProject(project) {
+      const saved = String(project && project.workState && project.workState.launchpadPinned || '').trim();
+      if (saved === 'Pinned' || saved === 'Not Pinned') return saved === 'Pinned';
+      const meta = launchpadMetaForProject(project);
+      return !!(meta && meta.pinned);
+    }
     function workSummaryCell(label, value) {
       return '<div class="state-item"><div class="k">' + esc(label) + '</div><div class="v">' + esc(valueOr(value)) + '</div></div>';
+    }
+    function normalizeLaunchpadText(value) {
+      return String(value == null ? '' : value).toLowerCase().replace(/[^a-z0-9]+/g, '');
+    }
+    function findLaunchpadProject(meta) {
+      if (!meta) return null;
+      const names = [meta.name].concat(meta.aliases || []).filter(Boolean).map(normalizeLaunchpadText);
+      return (PROJECTS || []).find(project => {
+        const projectName = normalizeLaunchpadText(project.projectName);
+        const projectSlug = normalizeLaunchpadText(project.projectSlug);
+        return names.includes(projectName) || names.includes(projectSlug);
+      }) || null;
+    }
+    function launchpadProjectTimestamp(project) {
+      const candidates = [];
+      if (project && project.workState) {
+        candidates.push(project.workState.updatedAt, project.workState.lastWorkedAt);
+      }
+      if (project && project.lastVerified) candidates.push(project.lastVerified);
+      (project && project.deployments || []).forEach(dep => candidates.push(dep.lastVerified));
+      const values = candidates.filter(Boolean).map(value => {
+        const date = new Date(value);
+        return isNaN(date.getTime()) ? null : { ms: date.getTime(), text: date.toLocaleString() };
+      }).filter(Boolean);
+      values.sort((a, b) => b.ms - a.ms);
+      return values[0] ? values[0].text : 'Not recorded';
+    }
+    function launchpadTimestampMs(project) {
+      const candidates = [];
+      if (project && project.workState) {
+        candidates.push(project.workState.updatedAt, project.workState.lastWorkedAt);
+      }
+      if (project && project.lastVerified) candidates.push(project.lastVerified);
+      (project && project.deployments || []).forEach(dep => candidates.push(dep.lastVerified));
+      const values = candidates.filter(Boolean).map(value => new Date(value).getTime()).filter(ms => !isNaN(ms));
+      return values.length ? Math.max.apply(null, values) : 0;
+    }
+    function launchpadConfig() {
+      return LAUNCHPAD_LIBRARY[LAUNCHPAD_ROLE] || LAUNCHPAD_LIBRARY.supervisor;
+    }
+    function launchpadEntries() {
+      const role = LAUNCHPAD_ROLE;
+      return (PROJECTS || []).filter(project => launchpadVisibleForRole(project, role)).map(project => {
+        const meta = launchpadMetaForProject(project) || {};
+        return {
+          meta: meta,
+          project: project,
+          syncedAtText: launchpadProjectTimestamp(project),
+          syncedAtMs: launchpadTimestampMs(project),
+          roleClass: launchpadVisibilityForProject(project) === 'supervisor' ? 'supervisor' : (launchpadVisibilityForProject(project) === 'property-manager' ? 'property-manager' : 'shared'),
+          pinned: launchpadPinnedForProject(project)
+        };
+      }).filter(entry => entry.project && entry.project.liveUrl);
+    }
+    function renderLaunchpadCard(entry) {
+      const project = entry.project;
+      const meta = entry.meta || {};
+      const visibility = launchpadVisibilityForProject(project);
+      const roleLabel = launchpadVisibilityLabel(visibility);
+      const liveUrl = project.liveUrl || project.liveScriptUrl || '';
+      const guideUrl = meta.guideUrl || project.anchorFolderUrl || '';
+      const roleBadgeClass = visibility === 'both' ? 'live' : (visibility === 'supervisor' ? 'live' : (visibility === 'property-manager' ? 'legacy' : 'warn'));
+      return '<article class="launchpad-card panel ' + esc(entry.roleClass || 'shared') + '">' +
+        '<div class="launchpad-card-head">' +
+          '<div>' +
+            '<h5>' + esc(project.projectName || meta.name || 'Untitled Project') + '</h5>' +
+            '<div class="sub">' + esc(project.category || 'Uncategorized') + ' | ' + esc(roleLabel) + '</div>' +
+          '</div>' +
+          '<div class="badges">' + badge('LIVE only', 'live') + badge('Visibility: ' + roleLabel, roleBadgeClass) + (entry.pinned ? badge('Pinned', 'legacy') : '') + '</div>' +
+        '</div>' +
+        '<div class="desc">' + esc(meta.summary || project.notes || 'No description added yet.') + '</div>' +
+        '<div class="use"><strong>Use:</strong> ' + esc(meta.use || (project.governance && project.governance.notes) || 'No usage note added yet.') + '</div>' +
+        '<div class="footer-row">' +
+          '<div class="sync-note">Last synced: ' + esc(entry.syncedAtText || 'Not recorded') + '</div>' +
+          '<div class="actions">' +
+            linkButton('Open Live', liveUrl, 'primary') +
+            (guideUrl ? linkButton(meta.guideLabel || 'Guide', guideUrl, '') : '<span class="btn disabled">Guide coming soon</span>') +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }
+    function renderLaunchpads() {
+      const cfg = launchpadConfig();
+      const title = document.getElementById('launchpad-title');
+      const intro = document.getElementById('launchpad-intro');
+      const viewLabel = document.getElementById('launchpad-view-label');
+      const audit = document.getElementById('launchpad-audit');
+      const count = document.getElementById('launchpad-count');
+      const hidden = document.getElementById('launchpad-hidden');
+      const sync = document.getElementById('launchpad-sync');
+      const syncNote = document.getElementById('launchpad-sync-note');
+      const list = document.getElementById('launchpad-list');
+      if (!title || !intro || !viewLabel || !audit || !count || !hidden || !sync || !syncNote || !list) return;
+      title.textContent = cfg.label || 'Launchpad';
+      intro.textContent = cfg.intro || '';
+      viewLabel.textContent = 'Previewing as ' + (cfg.label || 'Launchpad').replace(' Launchpad', '');
+      const allEntries = launchpadEntries();
+      const totalLiveProjects = (PROJECTS || []).filter(project => project && (project.liveUrl || project.liveScriptUrl)).length;
+      const filtered = allEntries.filter(entry => {
+        const haystack = [
+          entry.project.projectName,
+          entry.project.category,
+          entry.meta.summary,
+          entry.meta.use,
+          entry.project.notes,
+          entry.project.governance && entry.project.governance.notes
+        ].filter(Boolean).join(' ').toLowerCase();
+        return !LAUNCHPAD_SEARCH || haystack.includes(LAUNCHPAD_SEARCH.toLowerCase());
+      });
+      const sorted = filtered.slice().sort((a, b) => {
+        if (LAUNCHPAD_SORT === 'alpha') {
+          return String(a.project.projectName || '').localeCompare(String(b.project.projectName || ''), undefined, { sensitivity: 'base' });
+        }
+        if (LAUNCHPAD_SORT === 'recent') {
+          return (b.syncedAtMs || 0) - (a.syncedAtMs || 0);
+        }
+        return (a.meta.sort || 9999) - (b.meta.sort || 9999) || String(a.project.projectName || '').localeCompare(String(b.project.projectName || ''), undefined, { sensitivity: 'base' });
+      });
+      const pinnedEntries = sorted.filter(entry => entry.pinned);
+      const regularEntries = sorted.filter(entry => !entry.pinned);
+      const hiddenFromRole = Math.max(0, totalLiveProjects - allEntries.length);
+      count.textContent = String(sorted.length);
+      hidden.textContent = String(hiddenFromRole);
+      audit.textContent = 'Showing ' + sorted.length + ' of ' + allEntries.length + ' role-visible projects. ' + hiddenFromRole + ' other live projects are hidden from this role.';
+      sync.textContent = sorted.length ? sorted[0].syncedAtText : 'Not recorded';
+      syncNote.textContent = 'Based on the newest saved project record in this view.';
+      const sections = [];
+      if (pinnedEntries.length) {
+        sections.push(
+          '<div class="launchpad-section">' +
+            '<div>' +
+              '<h5>Pinned Projects</h5>' +
+              '<div class="section-note">The projects you want to keep at the top for this role.</div>' +
+            '</div>' +
+            '<div class="launchpad-grid">' + pinnedEntries.map(renderLaunchpadCard).join('') + '</div>' +
+          '</div>'
+        );
+      }
+      if (regularEntries.length) {
+        sections.push(
+          '<div class="launchpad-section">' +
+            '<div>' +
+              '<h5>All Projects in This View</h5>' +
+              '<div class="section-note">The rest of the live projects available to this role.</div>' +
+            '</div>' +
+            '<div class="launchpad-grid">' + regularEntries.map(renderLaunchpadCard).join('') + '</div>' +
+          '</div>'
+        );
+      }
+      list.innerHTML = sections.length ? sections.join('') : '<div class="launchpad-empty panel">No projects matched this launchpad view yet.</div>';
     }
     function healthStateLabel(value) {
       switch (value) {
@@ -669,6 +996,8 @@
           '<label>Confidence<select data-work-field="confidence">' + optionHtml(WORK_OPTIONS.confidenceStates, work.confidence || 'Unknown') + '</select></label>' +
           '<label>Sync: Local<select data-work-field="sync-local">' + optionHtml(WORK_OPTIONS.syncStates, (work.syncState && work.syncState.local) || 'Unknown') + '</select></label>' +
           '<label>Sync: GitHub<select data-work-field="sync-github">' + optionHtml(WORK_OPTIONS.syncStates, (work.syncState && work.syncState.github) || 'Unknown') + '</select></label>' +
+          '<label>Hub Visibility<select data-work-field="launchpadVisibility">' + launchpadVisibilityOptionHtml(launchpadVisibilityForProject(project)) + '</select></label>' +
+          '<label>Pin in Launchpads<select data-work-field="launchpadPinned">' + optionHtml(WORK_OPTIONS.launchpadPinnedStates, launchpadPinnedForProject(project) ? 'Pinned' : 'Not Pinned') + '</select></label>' +
           '<label>Last Action<textarea data-work-field="lastActionSummary">' + esc(work.lastActionSummary || '') + '</textarea></label>' +
           '<label>Next Action<textarea data-work-field="nextActionSummary">' + esc(work.nextActionSummary || '') + '</textarea></label>' +
           '<label style="grid-column: 1 / -1;">What still needs work<textarea data-work-field="healthNotes">' + esc(work.healthNotes || '') + '</textarea></label>' +
@@ -688,7 +1017,7 @@
       return '<article class="project-row panel health-' + esc(health.healthClass) + ' ' + (startOpen ? 'open' : '') + '">' +
         '<div class="project-summary">' +
           '<div class="project-name"><h4 title="' + esc(project.projectName) + '">' + esc(project.projectName) + '</h4><div class="sub">' + esc(project.category || 'Uncategorized') + ' | Registry row ' + esc(project.registryRow || '') + '</div></div>' +
-          '<div class="project-state"><div class="state-line">' + badge(health.healthLabel || 'Unknown', health.healthClass || 'unknown') + badge(derived.promotionStateLabel || 'Unknown') + badge(derived.syncOverview || 'Unknown') + '</div><div class="health-actions"><button type="button" class="btn health-operational" data-health-set="Operational">Operational</button><button type="button" class="btn health-needs-work" data-health-set="Needs Work">Needs Work</button><button type="button" class="btn health-broken" data-health-set="Broken">Broken</button></div><div class="summary-copy"><span class="key">Last</span>' + esc(valueOr(work.lastActionSummary, 'No action saved')) + '</div></div>' +
+          '<div class="project-state"><div class="state-line">' + badge(health.healthLabel || 'Unknown', health.healthClass || 'unknown') + badge(derived.promotionStateLabel || 'Unknown') + badge(derived.syncOverview || 'Unknown') + badge('Hub: ' + launchpadVisibilityLabel(launchpadVisibilityForProject(project))) + '</div><div class="health-actions"><button type="button" class="btn health-operational" data-health-set="Operational">Operational</button><button type="button" class="btn health-needs-work" data-health-set="Needs Work">Needs Work</button><button type="button" class="btn health-broken" data-health-set="Broken">Broken</button></div><div class="summary-copy"><span class="key">Last</span>' + esc(valueOr(work.lastActionSummary, 'No action saved')) + '</div></div>' +
           '<div class="project-state"><div class="state-line">' + projectBadges(project) + '</div><div class="summary-copy"><span class="key">Next</span>' + esc(valueOr(work.nextActionSummary, 'No next action saved')) + '</div></div>' +
           '<div class="project-state updated"><div class="summary-copy"><span class="key">Worked</span>' + esc(toDateText(work.lastWorkedAt)) + '</div><div class="summary-copy"><span class="key">Registry Checked</span>' + esc(valueOr(project.lastVerified, 'Not checked')) + '</div><div class="summary-copy"><span class="key">Needs Work</span>' + esc(valueOr(work.healthNotes, 'No notes saved')) + '</div></div>' +
           '<div class="quick-actions">' + linkButton('LIVE', project.liveUrl, 'primary') + linkButton('DEV', project.devUrl, 'dev') + copyCommandButton('Push Local → DEV', buildLocalToDevCommand(project), 'dev') + copyCommandButton('DEV → LIVE', buildDevToLiveCommand(project), 'primary') + copyCommandButton('Push to GitHub', buildGitHubCommand(project), '') + '</div>' +
@@ -834,12 +1163,29 @@
       const generatedAt = HUB.generatedAt || 'unknown';
       document.getElementById('subtitle').textContent = projectCount + '-project registry snapshot: ' + generatedAt;
       populateFilters();
+      renderLaunchpads();
       renderDashboard();
       renderProjectList();
       renderGovernanceTable();
       renderDeploymentTable();
       renderDev();
       renderLegacy();
+      syncLaunchpadMode();
+    }
+    function setActiveSection(sectionName, buttonEl) {
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      if (buttonEl) buttonEl.classList.add('active');
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      const section = document.getElementById(sectionName);
+      if (section) section.classList.add('active');
+      const title = document.getElementById('page-title');
+      if (title && buttonEl) title.textContent = buttonEl.textContent;
+      syncLaunchpadMode();
+    }
+    function syncLaunchpadMode() {
+      const activeSection = document.querySelector('.section.active');
+      document.body.classList.toggle('launchpad-mode', !!activeSection && activeSection.id === 'launchpads');
+      document.body.classList.toggle('public-launchpad-mode', HUB_MODE !== 'admin');
     }
     function saveProjectWorkState(button) {
       const row = button.closest('.project-row');
@@ -858,6 +1204,8 @@
         healthStatus: 'Unknown',
         healthNotes: '',
         confidence: 'Unknown',
+        launchpadVisibility: 'hidden',
+        launchpadPinned: 'Not Pinned',
         syncState: { live: 'Unknown', dev: 'Unknown', local: 'Unknown', github: 'Unknown' },
         notes: ''
       };
@@ -985,11 +1333,15 @@
       document.body.addEventListener('click', event => {
         const navBtn = event.target.closest('button[data-section]');
         if (navBtn) {
-          document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-          navBtn.classList.add('active');
-          document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-          document.getElementById(navBtn.dataset.section).classList.add('active');
-          document.getElementById('page-title').textContent = navBtn.textContent;
+          setActiveSection(navBtn.dataset.section, navBtn);
+          return;
+        }
+        const launchpadRole = event.target.closest('[data-launchpad-role]');
+        if (launchpadRole) {
+          LAUNCHPAD_ROLE = launchpadRole.getAttribute('data-launchpad-role') || 'supervisor';
+          document.querySelectorAll('[data-launchpad-role]').forEach(btn => btn.classList.remove('active'));
+          launchpadRole.classList.add('active');
+          renderLaunchpads();
           return;
         }
         const toggle = event.target.closest('button[data-toggle]');
@@ -1042,6 +1394,18 @@
           });
           return;
         }
+        const roleUrlCopy = event.target.closest('[data-copy-role-url]');
+        if (roleUrlCopy) {
+          const value = roleHubUrl(roleUrlCopy.getAttribute('data-copy-role-url'));
+          navigator.clipboard.writeText(value).then(() => {
+            const old = roleUrlCopy.textContent;
+            roleUrlCopy.textContent = 'Copied';
+            setTimeout(() => { roleUrlCopy.textContent = old; }, 1200);
+          }).catch(() => {
+            prompt('Copy this Hub link:', value);
+          });
+          return;
+        }
         const save = event.target.closest('[data-save-work]');
         if (save) {
           saveProjectWorkState(save);
@@ -1056,11 +1420,30 @@
           renderProjectList();
         });
       });
+      document.getElementById('launchpad-search').addEventListener('input', () => {
+        LAUNCHPAD_SEARCH = document.getElementById('launchpad-search').value;
+        renderLaunchpads();
+      });
+      document.getElementById('launchpad-sort').addEventListener('input', () => {
+        LAUNCHPAD_SORT = document.getElementById('launchpad-sort').value;
+        renderLaunchpads();
+      });
     }
     function loadHub() {
+      if (HUB_MODE !== 'admin') {
+        document.querySelectorAll('[data-launchpad-role]').forEach(btn => {
+          const role = btn.getAttribute('data-launchpad-role');
+          btn.classList.toggle('active', role === LAUNCHPAD_ROLE);
+        });
+        setActiveSection('launchpads', null);
+      }
       if (!window.google || !google.script || !google.script.run) {
         if (typeof getRegistrySnapshot === 'function') {
           const snapshot = getRegistrySnapshot();
+          const sourceProjects = snapshot.projects || [];
+          const previewProjects = HUB_MODE === 'admin'
+            ? sourceProjects
+            : sourceProjects.filter(project => launchpadVisibleForRole(project, LAUNCHPAD_ROLE) && (project.liveUrl || project.liveScriptUrl));
           HUB = {
             generatedAt: snapshot.generatedAt,
             registrySourcePath: snapshot.registrySourcePath,
@@ -1071,8 +1454,8 @@
             phase: snapshot.phase,
             safety: snapshot.safety,
             user: { email: 'local-preview', role: 'ADMIN', isAdmin: true, viewMode: 'ADMIN', simulationOnly: true },
-            summary: buildSummary(snapshot.projects || []),
-            projects: snapshot.projects || []
+            summary: buildSummary(previewProjects),
+            projects: previewProjects
           };
           PROJECTS = HUB.projects || [];
           renderAll();
@@ -1092,7 +1475,7 @@
         .withFailureHandler(err => {
           document.getElementById('loading').textContent = 'Hub failed to load: ' + (err && err.message ? err.message : err);
         })
-        .getRegistryHubData();
+        .getRegistryHubDataForMode(HUB_MODE);
     }
     wireControls();
     window.addEventListener('load', loadHub);
