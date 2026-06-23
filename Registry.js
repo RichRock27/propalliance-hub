@@ -506,7 +506,7 @@ function getProjectRegistry() {
     },
     {
         "id": "Key_Keeper",
-        "title": "Key Keeper 2000",
+        "title": "Key Inventory Database (KID)",
         "icon": "🔐",
         "scriptId": "1Bm4bz3w0jyhHzJGk6wJ7QWgQAfeh78LifjU2G9pxZftsOhR_8584vdaY",
         "liveUrl": "https://script.google.com/macros/s/AKfycbwvwKt7l0VA4WBD85_iGo2NCFnkVeEmwvCBQwRvPc0dcKFS8K1wyT80ST7OPgoCY1Et/exec",

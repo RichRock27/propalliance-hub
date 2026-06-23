@@ -2031,13 +2031,13 @@ function getRegistrySnapshot() {
     },
     {
       "projectId": "key_keeper_2000",
-      "projectName": "Key Keeper 2000",
+      "projectName": "Key Inventory Database (KID)",
       "projectSlug": "key-keeper-2000",
       "category": "Core Operations",
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "Official DEV baseline created from registry LIVE source; DEV deployment pinned to v1. LIVE unchanged.",
+      "notes": "LIVE v19 and DEV v13 verified on 2026-06-22 after KID rename, AppFolio sync, KID/CIP user handling, authorized-user manager, and responsive layout updates.",
       "registryRow": 22,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -2051,11 +2051,11 @@ function getRegistrySnapshot() {
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/key-keeper-2000/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/key-keeper-2000",
       "missingItems": "",
-      "lastVerified": "2026-05-20",
-      "readyForLive": "No pending DEV changes",
+      "lastVerified": "2026-06-22",
+      "readyForLive": "LIVE v19 verified on 2026-06-22; DEV v13",
       "promotionStatus": "IN SYNC",
       "lastDevChange": "DEV baseline initialized 2026-05-20.",
-      "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
+      "promotionNotes": "KID source synced to GitHub commit 47fcfb1; LIVE v19 and DEV v13 verified.",
       "dataSourceAudit": "REVIEW: CSV/manual-upload signals found",
       "scriptAudit": "ACCESSIBLE",
       "auditNotes": "Governance normalization: LIVE v3 identified; DEV missing; duplicate candidates remain review-only. Official DEV baseline created 2026-05-20; LIVE unchanged.",
@@ -2065,56 +2065,56 @@ function getRegistrySnapshot() {
           "env": "LIVE",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbwvwKt7l0VA4WBD85_iGo2NCFnkVeEmwvCBQwRvPc0dcKFS8K1wyT80ST7OPgoCY1Et/exec",
           "deploymentId": "AKfycbwvwKt7l0VA4WBD85_iGo2NCFnkVeEmwvCBQwRvPc0dcKFS8K1wyT80ST7OPgoCY1Et",
-          "pinnedVersion": "3",
+          "pinnedVersion": "19",
           "badge": "LIVE",
-          "lastVerified": "2026-05-10"
+          "lastVerified": "2026-06-22"
         },
         {
           "registryRow": 52,
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbxEwzljhyraLlp5eWDX7utt_ZmzsZB1XiSYLYxAZYducSoR-tGSas-r0nfCDTeNOpBGDg/exec",
           "deploymentId": "AKfycbxEwzljhyraLlp5eWDX7utt_ZmzsZB1XiSYLYxAZYducSoR-tGSas-r0nfCDTeNOpBGDg",
-          "pinnedVersion": "1",
+          "pinnedVersion": "13",
           "badge": "DEV",
-          "lastVerified": "2026-05-20"
+          "lastVerified": "2026-06-22"
         }
       ],
       "assets": [
         {
           "registryRow": 45,
           "assetType": "Script",
-          "name": "Key Keeper 2000 - LIVE Script",
+          "name": "Key Inventory Database (KID) - LIVE Script",
           "url": "https://script.google.com/home/projects/1Bm4bz3w0jyhHzJGk6wJ7QWgQAfeh78LifjU2G9pxZftsOhR_8584vdaY/edit",
           "notes": "LIVE script from Hub registry. Audit: REVIEW: CSV/manual-upload signals found",
           "critical": true,
-          "lastVerified": "2026-04-30"
+          "lastVerified": "2026-06-22"
         },
         {
           "registryRow": 46,
           "assetType": "Folder",
-          "name": "Key Keeper 2000 - DEV Anchor Folder",
+          "name": "Key Inventory Database (KID) - DEV Anchor Folder",
           "url": "https://drive.google.com/drive/folders/1QGClX9wLf_UfqFR7rat2tiZ_UXM-JNMf",
           "notes": "Anchor folder under PA Projects (MASTER) / 02_DEV (working).",
           "critical": true,
-          "lastVerified": "2026-04-30"
+          "lastVerified": "2026-06-22"
         },
         {
           "registryRow": 94,
           "assetType": "Script",
-          "name": "Key Keeper 2000 - DEV Script",
+          "name": "Key Inventory Database (KID) - DEV Script",
           "url": "https://script.google.com/home/projects/1h6PW2C4hbu56DKQ5J74uyq0RbHH1BXNUrrXUDLfxzHkxlQlF_Sm_Q_30/edit",
           "notes": "Official DEV Apps Script project created from verified registry LIVE source; use for experiments before LIVE promotion.",
           "critical": true,
-          "lastVerified": "2026-05-20"
+          "lastVerified": "2026-06-22"
         },
         {
           "registryRow": 0,
           "assetType": "GitHub",
-          "name": "Key Keeper 2000 - GitHub Repo",
+          "name": "Key Inventory Database (KID) - GitHub Repo",
           "url": "https://github.com/RichRock27/Key_Keeper.git",
           "notes": "Private GitHub source repo verified from the archived local project mirror.",
           "critical": true,
-          "lastVerified": "2026-06-15"
+          "lastVerified": "2026-06-22"
         }
       ],
       "governance": {
