@@ -10,9 +10,9 @@ function getRegistrySnapshot() {
   "generator": "pa-registry-backup-generator derived snapshot for PropAlliance Hub Phase 1",
   "registrySourcePath": "/Users/richgreen/Downloads/📊 Spreadsheets/PA WebApp Router Registry.xlsx",
   "registryHash": "sha256:9a5b0fb5336b9f7ee4d99747e28badd45e6367787c25039181698cf675e6b035",
-  "projectCount": 40,
-  "assetCount": 138,
-  "deploymentCount": 64,
+  "projectCount": 41,
+  "assetCount": 141,
+  "deploymentCount": 66,
   "phase": "Phase 1 Admin MVP",
   "safety": {
     "sourceOfTruth": "Registry workbook remains authoritative. Snapshot is a generated read-only view.",
@@ -3751,6 +3751,101 @@ function getRegistrySnapshot() {
         "backupMissing": true,
         "manualReviewRequired": true,
         "notes": "Registered as its own project. Needs separate DEV script/repo/backup hardening."
+      },
+      "visibility": {
+        "admin": true,
+        "supervisor": true,
+        "pm": true,
+        "owner": false
+      }
+    },
+    {
+      "projectId": "rental_photo_enhancer",
+      "projectName": "Rental Photo Enhancer (RPE)",
+      "projectSlug": "rental-photo-enhancer",
+      "category": "Marketing",
+      "owner": "rich@propalliance.com",
+      "status": "Live/Dev",
+      "routerStatus": "READY",
+      "notes": "Browser-based rental photo enhancement app for improving dark interior marketing photos. Added to managed Hub registry on 2026-06-23; DEV v6 contains a safer natural enhancement pass that lifts shadows while preserving detail.",
+      "registryRow": 40,
+      "sourceAuthority": "Manual Hub addition from existing Apps Script project",
+      "sourceOrigin": "GOOGLE_APPS_SCRIPT",
+      "liveUrl": "https://script.google.com/macros/s/AKfycbyyMbitqVvq4ooTjZO2cZ8VZBFzr1Npo7yEmF7hhkNWHyryhNdSIKwd_BXukt43PJJz/exec",
+      "devUrl": "https://script.google.com/macros/s/AKfycbxDcANlEql4WLOady5Hi25RvOfKmmpZ3dEUZdCqT3wqyVW6FRjAk0isBGSindeweA_-Tw/exec",
+      "liveScriptUrl": "https://script.google.com/home/projects/1BfAFeQN-5gK6D0TZ56BO5eSpKf1jMuBxwR1RJF0g9GjlRosiOuXc3DCR/edit",
+      "devScriptUrl": "https://script.google.com/home/projects/1c1nRXW1fZiJ6Mf5O9aJ43nI7hTusR9SZD3ycudh_4fFvZDnPxftBaru2/edit",
+      "liveScriptId": "1BfAFeQN-5gK6D0TZ56BO5eSpKf1jMuBxwR1RJF0g9GjlRosiOuXc3DCR",
+      "devScriptId": "1c1nRXW1fZiJ6Mf5O9aJ43nI7hTusR9SZD3ycudh_4fFvZDnPxftBaru2",
+      "anchorFolderUrl": "",
+      "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/rental-photo-enhancer/DEV_WORKSPACE",
+      "backupPath": "",
+      "missingItems": "Drive anchor folder, cold backup",
+      "lastVerified": "2026-06-23",
+      "readyForLive": "DEV v6 image enhancement needs user testing before LIVE promotion.",
+      "promotionStatus": "DEV In Progress",
+      "lastDevChange": "Managed DEV script and GitHub repo created 2026-06-23. DEV v6 replaces gray/hazy processing with conservative shadow lift, highlight protection, natural contrast, and light sharpening.",
+      "promotionNotes": "LIVE unchanged. Test DEV output against real rental photos before promoting.",
+      "dataSourceAudit": "Browser-only local image processing; no server-side image storage.",
+      "scriptAudit": "ACCESSIBLE",
+      "auditNotes": "Existing RPE app discovered outside Hub and added as managed project with separate DEV, local, and GitHub source.",
+      "deployments": [
+        {
+          "registryRow": 56,
+          "env": "LIVE",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbyyMbitqVvq4ooTjZO2cZ8VZBFzr1Npo7yEmF7hhkNWHyryhNdSIKwd_BXukt43PJJz/exec",
+          "deploymentId": "AKfycbyyMbitqVvq4ooTjZO2cZ8VZBFzr1Npo7yEmF7hhkNWHyryhNdSIKwd_BXukt43PJJz",
+          "pinnedVersion": "1",
+          "badge": "LIVE",
+          "lastVerified": "2026-06-23"
+        },
+        {
+          "registryRow": 57,
+          "env": "DEV",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbxDcANlEql4WLOady5Hi25RvOfKmmpZ3dEUZdCqT3wqyVW6FRjAk0isBGSindeweA_-Tw/exec",
+          "deploymentId": "AKfycbxDcANlEql4WLOady5Hi25RvOfKmmpZ3dEUZdCqT3wqyVW6FRjAk0isBGSindeweA_-Tw",
+          "pinnedVersion": "6",
+          "badge": "DEV",
+          "lastVerified": "2026-06-23"
+        }
+      ],
+      "assets": [
+        {
+          "registryRow": 96,
+          "assetType": "Script",
+          "name": "Rental Photo Enhancer (RPE) - LIVE Script",
+          "url": "https://script.google.com/home/projects/1BfAFeQN-5gK6D0TZ56BO5eSpKf1jMuBxwR1RJF0g9GjlRosiOuXc3DCR/edit",
+          "notes": "Existing RPE Apps Script project discovered 2026-06-23.",
+          "critical": true,
+          "lastVerified": "2026-06-23"
+        },
+        {
+          "registryRow": 97,
+          "assetType": "Script",
+          "name": "Rental Photo Enhancer (RPE) - DEV Script",
+          "url": "https://script.google.com/home/projects/1c1nRXW1fZiJ6Mf5O9aJ43nI7hTusR9SZD3ycudh_4fFvZDnPxftBaru2/edit",
+          "notes": "Managed DEV Apps Script project created from LIVE source; use for image enhancement improvements.",
+          "critical": true,
+          "lastVerified": "2026-06-23"
+        },
+        {
+          "registryRow": 98,
+          "assetType": "GitHub",
+          "name": "Rental Photo Enhancer (RPE) - GitHub Repo",
+          "url": "https://github.com/RichRock27/rental-photo-enhancer",
+          "notes": "Private GitHub source repo mirrored from the managed DEV workspace.",
+          "critical": true,
+          "lastVerified": "2026-06-23"
+        }
+      ],
+      "governance": {
+        "missingDev": false,
+        "staleLive": false,
+        "legacy": false,
+        "readOnly": false,
+        "backupMissing": true,
+        "manualReviewRequired": false,
+        "notes": "LIVE unchanged. DEV v6 needs user review before promotion."
       },
       "visibility": {
         "admin": true,
