@@ -151,8 +151,8 @@ var LAUNCHPAD_LIBRARY = {
         aliases: ['RPE', 'Rental Photo Enhancer'],
         roles: ['property-manager'],
         sort: 95,
-        summary: 'Brighten and clean up dark rental listing photos while keeping them natural.',
-        use: 'Use when interior marketing photos are too dark and need a quick before-listing improvement.',
+        summary: 'Brighten, clean up, and rescue dark rental listing photos while keeping them natural.',
+        use: 'Use when rental marketing photos are too dark and need quick enhancement before listing.',
       },
       {
         name: 'Tenant Action Sheet',
