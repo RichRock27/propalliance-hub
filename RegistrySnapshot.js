@@ -2037,7 +2037,7 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE v19 and DEV v13 verified on 2026-06-22 after KID rename, AppFolio sync, KID/CIP user handling, authorized-user manager, and responsive layout updates.",
+      "notes": "LIVE v21 verified on 2026-06-24 after overdue key list, manual overdue reminder action with routing fallback, Control Center confirm action fix, responsive narrow-browser layout, KID rename, AppFolio sync, KID/CIP user handling, and authorized-user manager updates.",
       "registryRow": 22,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -2051,11 +2051,11 @@ function getRegistrySnapshot() {
       "localDevPath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/key-keeper-2000/DEV_WORKSPACE",
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/key-keeper-2000",
       "missingItems": "",
-      "lastVerified": "2026-06-22",
-      "readyForLive": "LIVE v19 verified on 2026-06-22; DEV v13",
+      "lastVerified": "2026-06-24",
+      "readyForLive": "LIVE v21 verified on 2026-06-24; DEV source promoted",
       "promotionStatus": "IN SYNC",
       "lastDevChange": "DEV baseline initialized 2026-05-20.",
-      "promotionNotes": "KID source synced to GitHub commit 47fcfb1; LIVE v19 and DEV v13 verified.",
+      "promotionNotes": "KID DEV promoted to LIVE v21 on 2026-06-24. LIVE source verified against DEV/local after promotion.",
       "dataSourceAudit": "REVIEW: CSV/manual-upload signals found",
       "scriptAudit": "ACCESSIBLE",
       "auditNotes": "Governance normalization: LIVE v3 identified; DEV missing; duplicate candidates remain review-only. Official DEV baseline created 2026-05-20; LIVE unchanged.",
@@ -2065,18 +2065,18 @@ function getRegistrySnapshot() {
           "env": "LIVE",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbwvwKt7l0VA4WBD85_iGo2NCFnkVeEmwvCBQwRvPc0dcKFS8K1wyT80ST7OPgoCY1Et/exec",
           "deploymentId": "AKfycbwvwKt7l0VA4WBD85_iGo2NCFnkVeEmwvCBQwRvPc0dcKFS8K1wyT80ST7OPgoCY1Et",
-          "pinnedVersion": "19",
+          "pinnedVersion": "21",
           "badge": "LIVE",
-          "lastVerified": "2026-06-22"
+          "lastVerified": "2026-06-24"
         },
         {
           "registryRow": 52,
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbxEwzljhyraLlp5eWDX7utt_ZmzsZB1XiSYLYxAZYducSoR-tGSas-r0nfCDTeNOpBGDg/exec",
           "deploymentId": "AKfycbxEwzljhyraLlp5eWDX7utt_ZmzsZB1XiSYLYxAZYducSoR-tGSas-r0nfCDTeNOpBGDg",
-          "pinnedVersion": "13",
+          "pinnedVersion": "21",
           "badge": "DEV",
-          "lastVerified": "2026-06-22"
+          "lastVerified": "2026-06-24"
         }
       ],
       "assets": [
