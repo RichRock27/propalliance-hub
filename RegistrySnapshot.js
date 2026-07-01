@@ -409,7 +409,7 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE v305 verified. DEV v51 verified on fresh deployment URL. PMB Dev updated with central identity territory access, removed sheet/admin sync buttons, 4-hour automatic sync, signed-in Google identity access, and Rich alias recognition for admin login. Duplicate candidate IDs retained for manual review; do not delete or archive automatically.",
+      "notes": "LIVE v305 verified. DEV v54 verified. PMB Dev now includes KOTM break-glass access, View As controls for KOTM, central identity territory access, removed sheet/admin sync buttons, and 4-hour automatic sync. Duplicate candidate IDs retained for manual review; do not delete or archive automatically.",
       "registryRow": 6,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -424,13 +424,13 @@ function getRegistrySnapshot() {
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/property-management-board-pmb",
       "missingItems": "",
       "lastVerified": "2026-05-10",
-      "readyForLive": "Pending user verification of fresh DEV v51 PMB URL and admin login alias fix",
+      "readyForLive": "Pending user verification of DEV v54 KOTM and View As behavior",
       "promotionStatus": "",
       "lastDevChange": "Baseline release tracking initialized 2026-05-14.",
       "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
       "dataSourceAudit": "REVIEW: API AppFolio found, but CSV/legacy fallback signals also found",
       "scriptAudit": "ACCESSIBLE",
-      "auditNotes": "Batch 1 governance normalization: LIVE v305 verified. PMB DEV link corrected and updated to fresh DEV v51 admin login alias fix on 2026-07-01.",
+      "auditNotes": "Batch 1 governance normalization: LIVE v305 verified. PMB DEV updated to v54 with KOTM and View As on 2026-07-01.",
       "deployments": [
         {
           "registryRow": 8,
@@ -446,7 +446,7 @@ function getRegistrySnapshot() {
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbw6FNhsc6u-slaQ67Bwq_4AqDmvVT2EM-CcdWYgd9v6NpTf_HVHl_fyAKFNNVXNPsCa/exec",
           "deploymentId": "AKfycbw6FNhsc6u-slaQ67Bwq_4AqDmvVT2EM-CcdWYgd9v6NpTf_HVHl_fyAKFNNVXNPsCa",
-          "pinnedVersion": "51",
+          "pinnedVersion": "54",
           "badge": "DEV",
           "lastVerified": "2026-07-01"
         }
