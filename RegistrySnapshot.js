@@ -132,7 +132,7 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "Authoritative Hub, governance center, router authority, and registry authority. Replaces The Workshop as authoritative infrastructure. CID registry cleanup deployed to LIVE v68 and DEV v69 on 2026-07-01.",
+      "notes": "Authoritative Hub, governance center, router authority, and registry authority. Replaces The Workshop as authoritative infrastructure. CID registry cleanup deployed to LIVE v69 and DEV v70 on 2026-07-01.",
       "registryRow": 3,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -160,7 +160,7 @@ function getRegistrySnapshot() {
           "env": "LIVE",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbxGuAQHe9lVjTEBJBPwr9pVVV8WHyevHVC-XGBUgW7NHg6TLBAo_M0PMgx7PIAYUGZo/exec",
           "deploymentId": "AKfycbxGuAQHe9lVjTEBJBPwr9pVVV8WHyevHVC-XGBUgW7NHg6TLBAo_M0PMgx7PIAYUGZo",
-          "pinnedVersion": "68",
+          "pinnedVersion": "69",
           "badge": "LIVE",
           "lastVerified": "2026-07-01"
         },
@@ -169,7 +169,7 @@ function getRegistrySnapshot() {
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbyogm2uig9R05iBjeI976boZzrgRJJ3yiLbWoMXdhYjLoAn5hfoE5Es2waXpuI3aSOsxg/exec",
           "deploymentId": "AKfycbyogm2uig9R05iBjeI976boZzrgRJJ3yiLbWoMXdhYjLoAn5hfoE5Es2waXpuI3aSOsxg",
-          "pinnedVersion": "69",
+          "pinnedVersion": "70",
           "badge": "DEV",
           "lastVerified": "2026-07-01"
         }
@@ -180,7 +180,7 @@ function getRegistrySnapshot() {
           "assetType": "Script",
           "name": "Hub - LIVE Script",
           "url": "https://script.google.com/home/projects/14pg6QCx5W0K0inzIBRELLo5_rJgtsyglj6VfI0xkDJU4j13_CfViV_JJ/edit",
-          "notes": "Source code - LIVE; deployed Start Here Hub is version 68 with CID registry cleanup.",
+          "notes": "Source code - LIVE; deployed Start Here Hub is version 69 with CID registry cleanup.",
           "critical": true,
           "lastVerified": "2026-07-01"
         },
@@ -189,7 +189,7 @@ function getRegistrySnapshot() {
           "assetType": "Script",
           "name": "Hub - DEV Script",
           "url": "https://script.google.com/home/projects/14s3xyW1nkk43905FZ4ABIuk8Xsi6Rt7DeDB3AYoHTp9V4Oq8Q6UJplVf/edit",
-          "notes": "Source code - DEV; deployed DEV Hub is version 69 with CID registry cleanup.",
+          "notes": "Source code - DEV; deployed DEV Hub is version 70 with CID registry cleanup.",
           "critical": true,
           "lastVerified": "2026-07-01"
         },
