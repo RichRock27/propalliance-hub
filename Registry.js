@@ -107,7 +107,7 @@ function getProjectRegistry() {
         "icon": "🌐",
         "scriptId": "1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v",
         "liveUrl": "https://script.google.com/macros/s/AKfycbztHwLDlcs3aw1X5OV7U5sYNV-uua0ihza4Fx_oweCFf2xrW2vsM2Tj9JA6rQ0lNyuVbA/exec",
-        "devUrl": "https://script.google.com/macros/s/AKfycbyB3UbkigaEra0MWtcrUGf1g56jnXIht-y6TS2Ly_T1iUf1napCdudLsJSu2q3vhKoL/exec",
+        "devUrl": "https://script.google.com/macros/s/AKfycbw6FNhsc6u-slaQ67Bwq_4AqDmvVT2EM-CcdWYgd9v6NpTf_HVHl_fyAKFNNVXNPsCa/exec",
         "group": "core",
         "desc": "Operational KPI dashboard and property overview.",
         "lastDataUpdate": null,
