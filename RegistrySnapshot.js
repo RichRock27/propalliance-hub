@@ -1,21 +1,21 @@
 /**
  * Generated registry snapshot for PropAlliance Hub.
- * Source of truth: /Users/richgreen/Downloads/📊 Spreadsheets/PA WebApp Router Registry.xlsx
- * Generated: 2026-06-18T23:45:46.450Z
- * Do not hand-edit project data here; regenerate from the registry workbook.
+ * Source of truth: per-project registry.json files under /Users/richgreen/Dev/PA-Registry-DEV-Workspaces
+ * Verified: 2026-07-01
+ * Keep this snapshot aligned to the per-project registry.json files; the old Excel workbook path is not authoritative.
  */
 function getRegistrySnapshot() {
   return {
-  "generatedAt": "2026-06-18T23:45:46.450Z",
-  "generator": "pa-registry-backup-generator derived snapshot for PropAlliance Hub Phase 1",
-  "registrySourcePath": "/Users/richgreen/Downloads/📊 Spreadsheets/PA WebApp Router Registry.xlsx",
-  "registryHash": "sha256:9a5b0fb5336b9f7ee4d99747e28badd45e6367787c25039181698cf675e6b035",
+  "generatedAt": "2026-07-01T00:00:00.000-06:00",
+  "generator": "Codex registry cleanup from per-project registry.json files",
+  "registrySourcePath": "/Users/richgreen/Dev/PA-Registry-DEV-Workspaces/[project-slug]/registry.json",
+  "registryHash": "verified-against-project-registry-files-2026-07-01",
   "projectCount": 41,
   "assetCount": 141,
   "deploymentCount": 66,
   "phase": "Phase 1 Admin MVP",
   "safety": {
-    "sourceOfTruth": "Registry workbook remains authoritative. Snapshot is a generated read-only view.",
+    "sourceOfTruth": "Per-project registry.json files under /Users/richgreen/Dev/PA-Registry-DEV-Workspaces are authoritative. The old Excel workbook path is not authoritative.",
     "noDeploymentActions": true,
     "nonAdminSanitizationRequired": true
   },
@@ -409,12 +409,12 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE v305 verified. DEV v34 verified. Registry previously referenced stale DEV v14; normalized to DEV v34. Duplicate candidate IDs retained for manual review; do not delete or archive automatically.",
+      "notes": "LIVE v305 verified. DEV v42 verified. Hub snapshot corrected from stale DEV v34 deployment to working DEV v42 deployment on 2026-06-30. Duplicate candidate IDs retained for manual review; do not delete or archive automatically.",
       "registryRow": 6,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
       "liveUrl": "https://script.google.com/macros/s/AKfycbztHwLDlcs3aw1X5OV7U5sYNV-uua0ihza4Fx_oweCFf2xrW2vsM2Tj9JA6rQ0lNyuVbA/exec",
-      "devUrl": "https://script.google.com/macros/s/AKfycbxNGSmCTebTk-hjXY-1LkPlH-RS1wVmo-GbF2X7fADZqfGHv6qhOqIvkoGT7-M0cmD9/exec",
+      "devUrl": "https://script.google.com/macros/s/AKfycbyB3UbkigaEra0MWtcrUGf1g56jnXIht-y6TS2Ly_T1iUf1napCdudLsJSu2q3vhKoL/exec",
       "liveScriptUrl": "https://script.google.com/home/projects/1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1uKnCwfI0V_rY1FLbLQVjh-ZZgAYUEA3zdEYJG2OY0nNmF3MClSSUHfp1/edit",
       "liveScriptId": "1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v",
@@ -430,7 +430,7 @@ function getRegistrySnapshot() {
       "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
       "dataSourceAudit": "REVIEW: API AppFolio found, but CSV/legacy fallback signals also found",
       "scriptAudit": "ACCESSIBLE",
-      "auditNotes": "Batch 1 governance normalization: LIVE v305 / DEV v34 verified; stale DEV v14 corrected.",
+      "auditNotes": "Batch 1 governance normalization: LIVE v305 verified. PMB DEV link corrected to working DEV v42 deployment on 2026-06-30.",
       "deployments": [
         {
           "registryRow": 8,
@@ -444,9 +444,9 @@ function getRegistrySnapshot() {
         {
           "registryRow": 31,
           "env": "DEV",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbxNGSmCTebTk-hjXY-1LkPlH-RS1wVmo-GbF2X7fADZqfGHv6qhOqIvkoGT7-M0cmD9/exec",
-          "deploymentId": "AKfycbxNGSmCTebTk-hjXY-1LkPlH-RS1wVmo-GbF2X7fADZqfGHv6qhOqIvkoGT7-M0cmD9",
-          "pinnedVersion": "34",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbyB3UbkigaEra0MWtcrUGf1g56jnXIht-y6TS2Ly_T1iUf1napCdudLsJSu2q3vhKoL/exec",
+          "deploymentId": "AKfycbyB3UbkigaEra0MWtcrUGf1g56jnXIht-y6TS2Ly_T1iUf1napCdudLsJSu2q3vhKoL",
+          "pinnedVersion": "42",
           "badge": "DEV",
           "lastVerified": "2026-05-10"
         }
@@ -621,7 +621,7 @@ function getRegistrySnapshot() {
       "registryRow": 8,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
-      "liveUrl": "https://script.google.com/macros/s/AKfycbwSXLgSHXM7Xup1xqaKMS1hMKNc3VlQ3YAWaAhyEl7z52MLjD1x1HEGqwWtaK99kqrm/exec",
+      "liveUrl": "https://script.google.com/macros/s/AKfycbyKrqJap-T99B76N0R2n9Hw1iD_C2-9e-kOdE-Dj4etbdJHMcGMutOuoObOwx8MekHK/exec",
       "devUrl": "https://script.google.com/macros/s/AKfycbw_m8gd6tKOP-CFSQWp7WfYRAvZPMvbEidftPzJ609RJFpnZ2Qr9U9H2K9S_n4SshXr/exec",
       "liveScriptUrl": "https://script.google.com/home/projects/1-fwIEM4RQXr0SL2AaAgwhLA-ElWLdwwWaTTVvq_cId6qr1Phzw8fHFWG/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1fDmuWSF_FGlCpyJ1S4fUQDGOv5kiNhCWCD44N5kydUs8DsjIVqsHFcTp/edit",
@@ -643,8 +643,8 @@ function getRegistrySnapshot() {
         {
           "registryRow": 10,
           "env": "LIVE",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbwSXLgSHXM7Xup1xqaKMS1hMKNc3VlQ3YAWaAhyEl7z52MLjD1x1HEGqwWtaK99kqrm/exec",
-          "deploymentId": "AKfycbwSXLgSHXM7Xup1xqaKMS1hMKNc3VlQ3YAWaAhyEl7z52MLjD1x1HEGqwWtaK99kqrm",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbyKrqJap-T99B76N0R2n9Hw1iD_C2-9e-kOdE-Dj4etbdJHMcGMutOuoObOwx8MekHK/exec",
+          "deploymentId": "AKfycbyKrqJap-T99B76N0R2n9Hw1iD_C2-9e-kOdE-Dj4etbdJHMcGMutOuoObOwx8MekHK",
           "pinnedVersion": "",
           "badge": "LIVE",
           "lastVerified": "2026-05-20"
@@ -1938,7 +1938,7 @@ function getRegistrySnapshot() {
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
       "liveUrl": "https://script.google.com/macros/s/AKfycbzcBbfeXancte7uirmlrSVMkBoZ8fcIePhlVVOOi_MQsWiE_C_gzooqD8FF3cN9xWSZNQ/exec?owner_board=true",
-      "devUrl": "https://script.google.com/macros/s/AKfycbxNf9MnjAOkEOvd6wsJKHICHf9OrH9MCxM1FLVNL4cz9Jf1Y_972SeMgAB-JGBJTQJs_A/exec?owner_board=true",
+      "devUrl": "https://script.google.com/macros/s/AKfycbzh-62ttcvgabv12fftJOdDj_HLDft9mQ6Sv1vOcPhGmgE8B4jorFD5LtRc-Tek7rjOYQ/exec?owner_board=true",
       "liveScriptUrl": "https://script.google.com/home/projects/1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1JNdfgyxo_aEZgCYPeCYSALzp_ZLxl5oLjfX8ywxabp9zEJprMGI4EbUQ/edit",
       "liveScriptId": "1rnQEXxDoEfmkBtZ3_08t36UsIF8BlCB5uBhXXIwdpPA3UEenLkNZH7_v",
@@ -1968,8 +1968,8 @@ function getRegistrySnapshot() {
         {
           "registryRow": 61,
           "env": "DEV",
-          "webAppUrl": "https://script.google.com/macros/s/AKfycbxNf9MnjAOkEOvd6wsJKHICHf9OrH9MCxM1FLVNL4cz9Jf1Y_972SeMgAB-JGBJTQJs_A/exec?owner_board=true",
-          "deploymentId": "AKfycbxNf9MnjAOkEOvd6wsJKHICHf9OrH9MCxM1FLVNL4cz9Jf1Y_972SeMgAB-JGBJTQJs_A",
+          "webAppUrl": "https://script.google.com/macros/s/AKfycbzh-62ttcvgabv12fftJOdDj_HLDft9mQ6Sv1vOcPhGmgE8B4jorFD5LtRc-Tek7rjOYQ/exec?owner_board=true",
+          "deploymentId": "AKfycbzh-62ttcvgabv12fftJOdDj_HLDft9mQ6Sv1vOcPhGmgE8B4jorFD5LtRc-Tek7rjOYQ",
           "pinnedVersion": "1",
           "badge": "DEV",
           "lastVerified": "2026-05-20"
@@ -3695,7 +3695,7 @@ function getRegistrySnapshot() {
       "sourceAuthority": "Local registry update 2026-05-27",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
       "liveUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
-      "devUrl": "https://script.google.com/a/macros/propalliance.com/s/AKfycbyXA_q9q-YkxmoVHmqQwa_dLOMQdWedHJfHZyXLdARZ6a9vgeFU2FtsiCDoFsQmnWIi/exec",
+      "devUrl": "https://script.google.com/macros/s/AKfycbyjqrr08C-it1T8hPFiFVcT5dgsrfv78ILFguF_ag4/dev",
       "liveScriptUrl": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
       "devScriptUrl": "https://script.google.com/home/projects/1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY/edit",
       "liveScriptId": "1rC2-xlzju5zSPv1X3SoDWUBw07ONmqz_0CNYsU3VsaX6fkg-OzuGbNcY",
@@ -3855,16 +3855,16 @@ function getRegistrySnapshot() {
       }
     },
     {
-      "projectId": "pa_identity_email_routing_hub",
-      "projectName": "PA Identity & Email Routing Hub",
-      "projectSlug": "pa-identity-email-routing-hub",
+      "projectId": "central_identity_database",
+      "projectName": "Central Identity Database (CID)",
+      "projectSlug": "central-identity-database",
       "category": "Infrastructure",
       "owner": "rich@propalliance.com",
       "status": "Live - DEV Local / Needs Deploy",
       "routerStatus": "NEEDS DEV",
-      "notes": "Central source-of-truth staff directory and territory-based email routing library. Production is the bound Google Sheet/script. Local source exists; a separate DEV Sheet/script has not been created.",
+      "notes": "Official central identity, staff, role, territory, property, permission, and email routing database. Production is the bound Google Sheet/script. Local source exists; a separate DEV Sheet/script has not been created.",
       "registryRow": 39,
-      "sourceAuthority": "PA WebApp Router Registry.xlsx",
+      "sourceAuthority": "per-project registry.json",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
       "liveUrl": "https://docs.google.com/spreadsheets/d/1M_8Yln9yQLe6f2t5xmLf70bl2NYSipAgeX3ZKXdfsHA/edit",
       "devUrl": "",
@@ -3899,7 +3899,7 @@ function getRegistrySnapshot() {
         {
           "registryRow": 106,
           "assetType": "Script",
-          "name": "Identity Routing Hub - LIVE Script",
+          "name": "Central Identity Database (CID) - LIVE Script",
           "url": "https://script.google.com/home/projects/1KCSM8W7mTRjQ5sK6xK0z7wCuOsGlnR_JxeYTMDofQyzxqSUO3z2I53Ki/edit",
           "notes": "Container-bound Apps Script source and shared library used by connected property-management projects.",
           "critical": true,
@@ -3908,7 +3908,7 @@ function getRegistrySnapshot() {
         {
           "registryRow": 107,
           "assetType": "Sheet",
-          "name": "Identity Routing Hub - LIVE Sheet",
+          "name": "Central Identity Database (CID) - LIVE Sheet",
           "url": "https://docs.google.com/spreadsheets/d/1M_8Yln9yQLe6f2t5xmLf70bl2NYSipAgeX3ZKXdfsHA/edit",
           "notes": "Canonical staff, role, territory, property, permission, and routing-rule database.",
           "critical": true,

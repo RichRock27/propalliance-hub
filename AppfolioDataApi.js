@@ -49,6 +49,50 @@ function appfolioGetDefaultPropertyIds_() {
   }).filter(Boolean);
 }
 
+function setupCoreSyncAppfolioCredentials(clientId, clientSecret, propertyIds) {
+  var id = String(clientId || "").trim();
+  var secret = String(clientSecret || "").trim();
+  var properties = String(propertyIds || "").trim();
+
+  if (!id) throw new Error("Missing AppFolio client ID.");
+  if (!secret) throw new Error("Missing AppFolio client secret.");
+
+  var props = appfolioGetScriptProps_();
+  props.setProperty(APPFOLIO.SCRIPT_PROP.CLIENT_ID, id);
+  props.setProperty(APPFOLIO.SCRIPT_PROP.CLIENT_SECRET, secret);
+
+  if (properties) {
+    props.setProperty(APPFOLIO.SCRIPT_PROP.PROPERTY_IDS, properties);
+  }
+
+  return {
+    status: "success",
+    clientIdSet: true,
+    clientSecretSet: true,
+    propertyIdsSet: !!properties
+  };
+}
+
+function authorizeHubAppfolioAccess() {
+  appfolioRequireCredentials_();
+  var testUrl = appfolioGetReportUrl_("leads");
+  var resp = UrlFetchApp.fetch(testUrl + "?page=1", {
+    method: "get",
+    headers: {
+      Authorization: appfolioBuildAuthHeader_(),
+      Accept: "application/json"
+    },
+    muteHttpExceptions: true,
+    followRedirects: true
+  });
+
+  return {
+    status: "authorization_checked",
+    httpCode: resp.getResponseCode(),
+    sample: String(resp.getContentText() || "").slice(0, 200)
+  };
+}
+
 function appfolioRequireCredentials_() {
   var id = appfolioGetClientId_();
   var secret = appfolioGetClientSecret_();
@@ -97,7 +141,9 @@ function appfolioFetchJson_(url) {
   var code = resp.getResponseCode();
   var text = resp.getContentText() || "";
   if (code < 200 || code >= 300) {
-    throw new Error("AppFolio API request failed (" + code + "). URL=" + url + " Sample=" + text.slice(0, 300).replace(/\s+/g, " ").trim());
+    var err = new Error("AppFolio API request failed (" + code + "). URL=" + url + " Sample=" + text.slice(0, 300).replace(/\s+/g, " ").trim());
+    err.httpCode = code;
+    throw err;
   }
 
   try {
@@ -161,4 +207,3 @@ function appfolioFetchReportAllPages_(reportName, params, options) {
 
   return { rows: out, pagesFetched: pages, finalUrl: url || baseUrl };
 }
-

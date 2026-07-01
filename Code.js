@@ -804,7 +804,14 @@ function getHubData_(target, bypassCache) {
     }
 
     if (hubTargetRequested_(targets, 'leads')) {
-      loadHubReport_(out, 'leads', ['guest_card_interests', 'guest_card', 'leads'], mapLeadsSchema_);
+      var leadsResult = appfolioFetchFirstAvailableReport_(['guest_card_inquiries', 'guest_card_interests', 'guest_card', 'leads']);
+      if (leadsResult.ok) {
+        var leadsRows = mapLeadsSchema_(leadsResult.rows);
+        out.data.leads = leadsRows;
+        out.debug.push('Loaded leads from AppFolio report ' + leadsResult.reportName + ': ' + leadsRows.length + ' rows');
+      } else {
+        out.warnings.push('Could not load leads: ' + leadsResult.message);
+      }
     }
 
     if (hubTargetRequested_(targets, 'owners')) {
@@ -928,7 +935,16 @@ function loadPmbBundle_(out) {
   if (!out.data.moveouts) loadHubReport_(out, 'moveouts', ['tenant_movement', 'moveouts', 'move_outs']);
   if (!out.data.inspections) loadHubReport_(out, 'inspections', ['inspections', 'inspection']);
   if (!out.data.workorders) loadHubReport_(out, 'workorders', ['work_orders', 'workorders', 'work_order']);
-  if (!out.data.leads) loadHubReport_(out, 'leads', ['guest_card_interests', 'guest_card', 'leads'], mapLeadsSchema_);
+  if (!out.data.leads) {
+    var leadsResult = appfolioFetchFirstAvailableReport_(['guest_card_inquiries', 'guest_card_interests', 'guest_card', 'leads']);
+    if (leadsResult.ok) {
+      var leadsRows = mapLeadsSchema_(leadsResult.rows);
+      out.data.leads = leadsRows;
+      out.debug.push('Loaded leads from AppFolio report ' + leadsResult.reportName + ': ' + leadsRows.length + ' rows');
+    } else {
+      out.warnings.push('Could not load leads: ' + leadsResult.message);
+    }
+  }
   if (!out.data.renewals) loadHubReport_(out, 'renewals', ['renewals', 'renewal_detail']);
   if (!out.data.expirations) loadHubReport_(out, 'expirations', ['expiring_leases', 'expirations']);
   out.data.pmb = {
