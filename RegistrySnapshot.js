@@ -409,7 +409,7 @@ function getRegistrySnapshot() {
       "owner": "rich@propalliance.com",
       "status": "Live/Dev",
       "routerStatus": "READY",
-      "notes": "LIVE v305 verified. DEV v42 verified. Hub snapshot corrected from stale DEV v34 deployment to working DEV v42 deployment on 2026-06-30. Duplicate candidate IDs retained for manual review; do not delete or archive automatically.",
+      "notes": "LIVE v305 verified. DEV v50 verified. PMB Dev updated with central identity territory access, removed sheet/admin sync buttons, 4-hour automatic sync, and signed-in Google identity access. Duplicate candidate IDs retained for manual review; do not delete or archive automatically.",
       "registryRow": 6,
       "sourceAuthority": "PA WebApp Router Registry.xlsx",
       "sourceOrigin": "GOOGLE_APPS_SCRIPT",
@@ -424,13 +424,13 @@ function getRegistrySnapshot() {
       "backupPath": "/Users/richgreen/Dev/PA-Registry-Local-Backup-2026-05-20-124556/property-management-board-pmb",
       "missingItems": "",
       "lastVerified": "2026-05-10",
-      "readyForLive": "No pending DEV changes",
+      "readyForLive": "Pending user verification of DEV v50 signed-in access fix",
       "promotionStatus": "",
       "lastDevChange": "Baseline release tracking initialized 2026-05-14.",
       "promotionNotes": "LIVE and DEV baseline set to registry release v1.",
       "dataSourceAudit": "REVIEW: API AppFolio found, but CSV/legacy fallback signals also found",
       "scriptAudit": "ACCESSIBLE",
-      "auditNotes": "Batch 1 governance normalization: LIVE v305 verified. PMB DEV link corrected to working DEV v42 deployment on 2026-06-30.",
+      "auditNotes": "Batch 1 governance normalization: LIVE v305 verified. PMB DEV link corrected and updated to DEV v50 signed-in identity access fix on 2026-07-01.",
       "deployments": [
         {
           "registryRow": 8,
@@ -446,9 +446,9 @@ function getRegistrySnapshot() {
           "env": "DEV",
           "webAppUrl": "https://script.google.com/macros/s/AKfycbyB3UbkigaEra0MWtcrUGf1g56jnXIht-y6TS2Ly_T1iUf1napCdudLsJSu2q3vhKoL/exec",
           "deploymentId": "AKfycbyB3UbkigaEra0MWtcrUGf1g56jnXIht-y6TS2Ly_T1iUf1napCdudLsJSu2q3vhKoL",
-          "pinnedVersion": "42",
+          "pinnedVersion": "50",
           "badge": "DEV",
-          "lastVerified": "2026-05-10"
+          "lastVerified": "2026-07-01"
         }
       ],
       "assets": [
